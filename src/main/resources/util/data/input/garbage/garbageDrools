@@ -1,0 +1,200 @@
+package solver
+    dialect "java"
+
+import domain.Lesson;
+import domain.Lecturer;
+import domain.Preference;
+import domain.Room;
+import domain.Semester;
+import domain.Subject;
+import domain.Preference;
+import domain.Course;
+import app.ScheduleSolution;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+
+global HardSoftScoreHolder scoreHolder;
+
+
+rule "noSameRoomAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period,
+        $leftCourse : course,
+        $leftLecturer : course.getLecturer(),
+        $leftSemester : course.getSemester(),
+        $leftSubject : course.getSubject(),
+                    parallelId == 0)
+
+        $rightLesson : Lesson(id != $leftId, room == $leftRoom, period == $leftPeriod, course != $leftCourse, parallelId == 0);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noSameSemesterAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period,
+        $leftCourse : course,
+        $leftLecturer : course.getLecturer(),
+        $leftSemester : course.getSemester(),
+        $leftSubject : course.getSubject())
+
+        $rightLesson : Lesson(id != $leftId, room != $leftRoom, period == $leftPeriod, course.getSemester() != $leftSemester);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noLecturerAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period,
+        $leftCourse : course,
+        $leftLecturer : course.getLecturer(),
+        $leftSemester : course.getSemester(),
+        $leftSubject : course.getSubject())
+
+        $rightLesson : Lesson(id != $leftId, room != $leftRoom, period == $leftPeriod, course.getLecturer() == $leftLecturer);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "preferenceBroken"
+    when
+        $leftLesson : Lesson(
+            $leftPeriod : period,
+            $leftLecturer : course.getLecturer(),
+            $leftDay : period.getDay(),
+            $leftHour : period.getHour())
+
+        $rightPreference : Preference(
+            $constraint : constraint,
+            $rightDay : day,
+            $rightHour : hour,
+            $rightLecturer : lecturer,
+            $leftLecturer == $rightLecturer,
+            $leftDay == $rightDay,
+            $leftHour == $rightHour);
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, $constraint);
+end
+
+rule "collidingBlocksLeft"
+    when
+        $leftLesson : Lesson(
+            $leftPeriod : period,
+            $leftDay : period.getDay(),
+            $leftHour : period.getHour(),
+            parallelId == 0,
+            $leftBlockLength : period.getBlockLength())
+
+        $rightLesson : Lesson(
+            $rightPeriod : period,
+            $rightDay : period.getDay(),
+            $rightHour : period.getHour(),
+            $rightBlockLength : period.getBlockLength(),
+            $leftDay == $rightDay,
+            parallelId == 0,
+            $leftHour < $rightHour,
+            ($leftHour + $leftBlockLength - 1) == $rightHour)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "collidingWithEndOfSchedule"
+    when
+        $lesson : Lesson(
+            $period : period,
+            $day : period.day,
+            $hour : period.hour,
+            $blockLength : period.blockLength,
+            ($hour + $blockLength - 1 > 12))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noSameRoomAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period)
+
+        $rightLesson : Lesson(
+        id != $leftId,
+        period.day == $leftPeriod.day,
+        period.hour == $leftPeriod.hour,
+        room.getNumber() == $leftRoom.getNumber());
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noSameSemesterAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period,
+        $leftCourse : course,
+        $leftLecturer : course.getLecturer(),
+        $leftSemester : course.getSemester(),
+        $leftSubject : course.getSubject())
+
+        $rightLesson : Lesson(
+        id != $leftId,
+        period.day == $leftPeriod.day,
+        period.hour == $leftPeriod.hour,
+        course.getSemester() == $leftSemester);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noLecturerAtSameTime"
+    when
+        $leftLesson : Lesson(
+        $leftId : id,
+        $leftRoom : room,
+        $leftPeriod : period,
+        $leftCourse : course,
+        $leftLecturer : course.getLecturer(),
+        $leftSemester : course.getSemester(),
+        $leftSubject : course.getSubject())
+
+        $rightLesson : Lesson(
+        id != $leftId,
+        period.day == $leftPeriod.day,
+        period.hour == $leftPeriod.hour,
+        course.getLecturer() == $leftLecturer);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+
+
+
+rule "collidingWithEndOfSchedule"
+    when
+        $lesson : Lesson(
+            $period : period,
+            $day : period.day,
+            $hour : period.hour,
+            $blockLength : blockLength,
+            ($hour + $blockLength - 1 > 12) == true)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -4);
+end
+
+rule "collidingBlocks"
+    when
+        $leftLesson : Lesson($u : uKW)
+        $rightLesson : Lesson(collidesSimple($leftLesson, $rightLesson), uKW != $u)
+    then
+     scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+

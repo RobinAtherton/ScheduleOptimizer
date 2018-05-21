@@ -1,0 +1,81 @@
+private void bindPreferencesToLecturers() {
+        for (Lecturer lecturer : lecturers) {
+            findFittingPreferencesToPerson(preferences, lecturer);
+        }
+    }
+
+    private static void findFittingPreferencesToPerson(List<Preference> preferences, Lecturer lecturer) {
+        for (Preference preference : preferences) {
+            if (lecturer.getShortName().equals(preference.getShortName())) {
+                lecturer.addPreference(preference);
+            }
+        }
+    }
+
+
+    //Deprecated
+        private void readPreferenceDataOutdated() throws  IOException {
+            BufferedReader br = new BufferedReader(new FileReader(fileLoader.getPreferencesFile()));
+            String line = br.readLine();
+            while (line != null) {
+                String[] parts = clean(line);
+                Preference preference = new Preference();
+                findTypeOfPreference(parts, preference);
+                //preference.setShortName(parts[1]);
+                preference.setDay(Integer.parseInt(parts[2]));
+                preference.setHour(Integer.parseInt(parts[3]));
+                preference.setConstraint(Integer.parseInt(parts[4]));
+                preferences.add(preference);
+                line = br.readLine();
+            }
+            System.out.println("Preference Objects filled");
+        }
+
+
+
+public boolean collidesByGroup(Lesson leftLesson, Lesson rightLesson) {
+        if (leftLesson.getGroup().equals("NO_GROUP") && leftLesson.getGroup().equals("NO_GROUP")) {
+            return false;
+        }
+        if (!rightLesson.equals(leftLesson)) {
+            if (leftLesson.getGroup().contains(rightLesson.group)) {
+                if (isColliding(rightLesson, leftLesson)) {
+                    return true;
+                }
+            } else if (getGroup().contains(leftLesson.getGroup())) {
+                if (isColliding(rightLesson, leftLesson)) {
+                    return true;
+                }
+            } else if (leftLesson.getGroup().equals(this.group)) {
+                if (isColliding(rightLesson, leftLesson)) {
+                    return true;
+                }
+            } else if (getGroup().equals(leftLesson.getGroup())) {
+                if (isColliding(rightLesson, leftLesson)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean sameGroup(Lesson leftLesson, Lesson rightLesson) {
+        if (leftLesson.getGroup().equals("NO_GROUP") || rightLesson.getGroup().equals("NO_GROUP")) {
+            return false;
+        }
+        if (!leftLesson.equals(rightLesson)) {
+            if (leftLesson.getGroup().contains(rightLesson.group)) {
+                return true;
+            } else if (rightLesson.getGroup().contains(leftLesson.getGroup())) {
+                return true;
+            } else if (rightLesson.getGroup().equals(leftLesson.group)) {
+                return true;
+            } else if (leftLesson.getGroup().equals(rightLesson.getGroup())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    */

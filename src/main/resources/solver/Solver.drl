@@ -1,0 +1,131 @@
+package solver
+    dialect "java"
+
+import domain.Lesson;
+import domain.Period;
+import domain.Lecturer;
+import domain.Preference;
+import domain.Room;
+import domain.Semester;
+import domain.Subject;
+import domain.Preference;
+import domain.Course;
+import app.ScheduleSolution;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+
+global Integer modifier;
+global HardSoftScoreHolder scoreHolder;
+
+//#####################HARD_CONSTRAINTS#####################
+rule "noSameRoomAtSameTime"
+    when
+        $leftLesson : Lesson($leftRoom : room)
+        $rightLesson : Lesson(room == $leftRoom,
+            coupledCollides($leftLesson))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noLecturerAtSameTime"
+    when
+        $leftLesson : Lesson($leftLecturer : course.lecturer)
+        $rightLesson : Lesson(course.lecturer == $leftLecturer,
+            coupledCollides($leftLesson))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noSemesterAtSameTime"
+    when
+        $leftLesson : Lesson($leftSemester : course.getSemester())
+        $rightLesson : Lesson(course.semester == $leftSemester,
+            extensiveCollides($leftLesson))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -2);
+end
+
+rule "collidingWithEndOfSchedule"
+    when
+        $lesson : Lesson(
+            $hour : period.hour,
+            $blockLength : blockLength,
+            ($hour + $blockLength - 1 > 12))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -10);
+end
+
+
+//#####################SOFT_CONSTRAINTS#####################
+rule "preferenceBroken"
+    when
+        $rightPreference : Preference(constraint < 0)
+        $leftLesson : Lesson(prefCollides($rightPreference))
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -6);
+end
+
+rule "avoidDaysWithOneLesson"
+    when
+        $lesson : Lesson($size : sameDay.size(), $size == 0)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -$lesson.getPeriod().getHour()*10);
+end
+
+rule "scheduleCompactness"
+    when
+        $lesson : Lesson()
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, $lesson.checkForCompactness() * 2);
+end
+
+rule "scheduleEarlyness"
+    when
+        $lesson : Lesson()
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -$lesson.getHour());
+end
+
+rule "preventLateFridays"
+    when
+        $lesson : Lesson(period.getDay() == 5)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -$lesson.getHour() * 2);
+end
+
+rule "nonAdjacentSameSubjects"
+    when
+        $lesson : Lesson(checkForNonAdjacentLessons())
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -3);
+end
+
+rule "benefitFreeDays"
+    when
+        $period : Period($day : day)
+        $semester : Semester()
+        accumulate(
+            $lesson : Lesson(period.day == $day, course.getSemester() == $semester);
+            $lessonCount : count($lesson);
+            $lessonCount < 1
+        )
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, 3);
+end
+
+
+rule "tryForFriday"
+    when
+        not (exists Lesson(period.day == 5))
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, 5);
+end
+
+
+
+
+
+
+
+
+
+

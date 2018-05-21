@@ -1,0 +1,164 @@
+for (int i = 0; i < lessons.size(); i++) {
+                Lesson left = lessons.get(i);
+                scoreDirector.beforeVariableChanged(left, "period");
+                left.setPeriod(lessons.get(i).getPeriod());
+                scoreDirector.afterVariableChanged(left, "period");
+
+                for(Lesson coupled : left.getCoupledLessons())
+                {
+                    scoreDirector.beforeVariableChanged(coupled, "period");
+                    coupled.setPeriod(lessons.get(i).getPeriod());
+                    scoreDirector.afterVariableChanged(coupled, "period");
+                }
+            }
+
+
+
+
+        int counter = 1;
+        scoreDirector.beforeVariableChanged(lesson, "lesson");
+        lesson.setPeriod(previousPeriod);
+        scoreDirector.afterVariableChanged(lesson, "lesson");
+        List<Lesson> lessons = lesson.getCoupledLessons();
+        scoreDirector.beforeVariableChanged(lessons, "lessons");
+        for (Lesson lesson : lessons) {
+            Period period = new Period();
+            period.setDay(lesson.getPeriod().getDay());
+            period.setHour(lesson.getPeriod().getHour() + counter);
+            lesson.setPeriod(period);
+            counter++;
+        }
+
+        scoreDirector.afterVariableChanged(lessons, "lessons");
+
+
+
+        rule "lecturerPreferenceBroken"
+            when
+                $lesson : Lesson($id : id, $room : room, $period : period, $course : course)
+                $lecturer : Lecturer(shortName == $course.getLecturer().getShortName()
+                                        $pref : Preference() from $lecturer.getPreferences(), $pref.day != $period.day, $pref.hour != $period.hour)
+            then
+                scoreHolder.addSoftConstraintMatch(kcontext, -1);
+        end
+
+
+rule "lecturerPreferenceBroken"
+    when
+        $lesson : Lesson($id : id, $room : room, $period : period, $course : course)
+        $lecturer : Lecturer(shortName == $course.getLecturer().getShortName(), $l : lookUpPreference($period.getDay(), $period.getHour(), $l != true);
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+end
+
+rule "lecturerPreferenceBroken"
+    when
+        $lesson : Lesson($id : id, $room : room, $period : period, $course : course)
+        $lecturer : Lecturer(shortName == $course.getLecturer().getShortName(), $l : lookUpPreference($period.getDay(), $period.getHour(), $l != true);
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+end
+
+
+
+
+
+
+
+rule "collidingBlocksBeta"
+    when
+    $leftLesson : Lesson(
+                $leftPeriod : period,
+                $leftDay : period.getDay(),
+                $leftHour : period.getHour(),
+                $leftParallelId : parallelId,
+                $leftBlockLength : period.getBlockLength())
+
+            $rightLesson : Lesson(
+                $rightPeriod : period,
+                $rightDay : period.getDay(),
+                $rightHour : period.getHour(),
+                $rightBlockLength : period.getBlockLength(),
+                $leftDay == $rightDay,
+                parallelId != $leftParallelId,
+                $leftHour < $rightHour,
+                $rightHour < ($leftHour + $leftBlockLength - 1)
+                )
+    then
+            scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+
+rule "avoidCollidingBlocks"
+    when
+        $leftLesson : Lesson(
+            $leftId : id,
+            $leftPeriod : period
+        )
+        $rightLesson : Lesson(
+            $rightId : id,
+            $rightPeriod : period,
+            $leftId != $rightId,
+            collides($leftLesson, $rightLesson) == true
+        )
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -2);
+end
+
+
+rule "noSameRoomAtSameTime"
+    when
+        $leftLesson : Lesson($leftId : id, $leftRoom : room, $leftPeriod : period, $leftCourse : course)
+        $rightLesson : Lesson(id != $leftId, room == $leftRoom, period == $leftPeriod, course != $leftCourse);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+
+rule "noSameSemesterAtSameTime"
+    when
+        $leftLesson : Lesson($leftId : id, $leftRoom : room, $leftPeriod : period, $leftCourse : course, $leftSemester : course.getSemester())
+        $rightLesson : Lesson(id != $leftId, room != $leftRoom, period == $leftPeriod, course.getSemester() != $leftSemester);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noLecturerAtSameTime"
+    when
+        $leftLesson : Lesson($leftId : id, $leftRoom : room, $leftPeriod : period, $leftCourse : course, $leftLecturer : course.getLecturer())
+        $rightLesson : Lesson(id != $leftId, room != $leftRoom, period == $leftPeriod, course.getLecturer() == $leftLecturer);
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "noLecturerAtSameTime"
+    when
+        $leftLesson : Lesson($leftLecturer : course.lecturer)
+        $rightLesson : Lesson(course.lecturer == $leftLecturer, globalCollision($leftLesson), not globalLecturerException($leftLesson))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "FWPMCollision"
+    when
+        $leftLesson : Lesson()
+        $rightLesson : Lesson(softCollides($leftLesson))
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+end
+
+            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.SynchronizeDayFactory</moveListFactoryClass></moveListFactory>
+
+
+rule "benefitFreeDays"
+    when
+        accumulate(
+            $period : Period($day : day)
+            and exists Lesson($period.getDay() == day);
+            $periodCount : count($period);
+            $periodCount == 0
+        )
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, 100);
+end
+

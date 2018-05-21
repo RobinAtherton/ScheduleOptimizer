@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<solver>
+    <noChangePhase/>
+    <entityClass>domain.Lesson</entityClass>
+    <solutionClass>app.ScheduleSolution</solutionClass>
+
+    <environmentMode>FULL_ASSERT</environmentMode>
+    <scoreDirectorFactory>
+        <scoreDrl>solver/Solver.drl</scoreDrl>
+    </scoreDirectorFactory>
+    <localSearch>
+            <localSearchType>TABU_SEARCH</localSearchType>
+        <unionMoveSelector>
+            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.ResistantSwapMoveFactory</moveListFactoryClass></moveListFactory>
+            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.CoupledLessonChangeMoveFactory</moveListFactoryClass></moveListFactory>
+        </unionMoveSelector>
+    </localSearch>
+
+    <termination>
+        <secondsSpentLimit>120</secondsSpentLimit>
+    </termination>
+</solver>
