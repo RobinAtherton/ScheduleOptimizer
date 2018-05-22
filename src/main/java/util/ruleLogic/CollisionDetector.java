@@ -27,7 +27,8 @@ public class CollisionDetector {
                 }
             } else if (left.isFWPM() ^ right.isFWPM()) {
                 if (baseCollision(left, right)) {
-                    return fwpToNonCollision(left, right);
+                    //return fwpToNonCollision(left, right);
+                    return fwpmToNonFwpmCollision(left, right) ^ fwpmToNonFwpmCollision(right, left);
                 }
             } else {
                 if (baseCollision(left, right)) {
@@ -64,13 +65,13 @@ public class CollisionDetector {
         boolean nonBlockedAvailable = false;
         if (left.isPractical() && right.isPractical()) {
             for (Lesson dodge : left.getDodgeableLessons()) {
-                if (dodge.getPracticalBlocked().size() == 0) {
+                if (compareBlocked(dodge)) {
                     nonBlockedAvailable = true;
                     break;
                 }
             }
             for (Lesson dodge : right.getDodgeableLessons()) {
-                if (dodge.getPracticalBlocked().size() == 0) {
+                if (compareBlocked(dodge)) {
                     nonBlockedAvailable = true;
                     break;
                 }
@@ -79,11 +80,15 @@ public class CollisionDetector {
         return nonBlockedAvailable;
     }
 
+    private static boolean compareBlocked(Lesson dodge) {
+        return dodge.getPracticalBlocked().size() == 0 && dodge.getFwpmBlocked().size() == 0;
+    }
+
     private static boolean fwpToNonCollision(Lesson left, Lesson right) {
         boolean nonBlockedAvailable = false;
         if (left.isFWPM()) {
             for (Lesson dodge : right.getDodgeableLessons()) {
-                if (dodge.getFwpmBlocked().size() == 0) {
+                if (compareBlocked(dodge)) {
                     nonBlockedAvailable = true;
                     break;
                 }
@@ -96,7 +101,7 @@ public class CollisionDetector {
             }
         } else if (right.isFWPM()) {
             for (Lesson dodge : left.getDodgeableLessons()) {
-                if (dodge.getFwpmBlocked().size() == 0) {
+                if (compareBlocked(dodge)) {
                     nonBlockedAvailable = true;
                     break;
                 }
@@ -111,6 +116,25 @@ public class CollisionDetector {
 
         }
         return COLLISION;        //TODO FIX SCORE CORRUPTION
+    }
+
+    private static boolean fwpmToNonFwpmCollision(Lesson left, Lesson right) {
+        boolean nonBlockedAvailable = false;
+        if (right.isFWPM() && !left.isFWPM()) {
+            for (Lesson dodge : left.getDodgeableLessons()) {
+                if (dodge.getPracticalBlocked().size() == 0
+                        && dodge.getFwpmBlocked().size() == 0) {
+                    nonBlockedAvailable = true;
+                    break;
+                }
+            }
+        }
+        if (nonBlockedAvailable) {
+            return NO_COLLISION;
+        }
+        left.setCollisionReason("FWPM - Pflicht Kollision");
+        right.setCollisionReason("FWPM - Pflicht Kollision");
+        return COLLISION;
     }
 
     private static boolean isFWPMCollision(Lesson left, Lesson right) {

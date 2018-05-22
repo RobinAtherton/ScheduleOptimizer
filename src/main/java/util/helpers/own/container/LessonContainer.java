@@ -37,10 +37,6 @@ public class LessonContainer {
         schedule.get(lesson.getPeriod().getDay()).put(lesson.getPeriod().getHour(), temp);
     }
 
-    public Map<Integer, Map<Integer, List<Lesson>>> getSchedule() {
-        return schedule;
-    }
-
     public boolean isEmpty() {
         return schedule.isEmpty();
     }

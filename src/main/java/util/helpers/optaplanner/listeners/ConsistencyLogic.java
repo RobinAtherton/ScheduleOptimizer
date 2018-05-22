@@ -79,7 +79,7 @@ public class ConsistencyLogic {
         }
     }
 
-    public static void updatePracticalBlockedList(ScoreDirector<ScheduleSolution> scoreDirector, Lesson lesson) {
+    public static void updatePracticalBlockedList1(ScoreDirector<ScheduleSolution> scoreDirector, Lesson lesson) {
         for (Lesson outer : lesson.getSameSemester()) {
             scoreDirector.beforeVariableChanged(outer, "practicalBlocked");
             outer.getPracticalBlocked().remove(lesson);
@@ -93,6 +93,23 @@ public class ConsistencyLogic {
                 } else if (lesson.isPractical()) {
                     addPracticalBlockedLesson(scoreDirector, outer, lesson);
                 } else if (lesson.isPractical() && outer.isPractical()) {
+                    addPracticalBlockedLesson(scoreDirector, outer, lesson);
+                    addPracticalBlockedLesson(scoreDirector, lesson, outer);
+                }
+            }
+        }
+    }
+
+    public static void updatePracticalBlockedList(ScoreDirector<ScheduleSolution> scoreDirector, Lesson lesson) {
+        for (Lesson outer : lesson.getSameSemester()) {
+            scoreDirector.beforeVariableChanged(outer, "practicalBlocked");
+            outer.getPracticalBlocked().remove(lesson);
+            scoreDirector.afterVariableChanged(outer, "practicalBlocked");
+        }
+        removePreviousPracticalBlocked(scoreDirector, lesson);
+        for (Lesson outer : lesson.getSameDay()) {
+            if (CollisionDetector.basicCollision(lesson, outer)) {
+                if (lesson.isPractical() && outer.isPractical()) {
                     addPracticalBlockedLesson(scoreDirector, outer, lesson);
                     addPracticalBlockedLesson(scoreDirector, lesson, outer);
                 }

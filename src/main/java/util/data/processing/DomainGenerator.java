@@ -121,22 +121,6 @@ public class DomainGenerator {
         }
     }
 
-    public static List<Period> readPeriodData(File input) throws IOException {
-        Set<Period> periods = new HashSet<>();
-        BufferedReader br = new BufferedReader(new FileReader(input));
-        String line = br.readLine();
-        while (line != null) {
-            String[] parts = Formater.clean(line);
-            Period period = new Period();
-            period.setDay(Integer.parseInt(parts[5]));
-            period.setHour(Integer.parseInt(parts[6]));
-            period.setId(Integer.parseInt(parts[0]));
-            periods.add(period);
-            line = br.readLine();
-        }
-        return new ArrayList<>(periods);
-    }
-
     public static List<Period> generatePeriodData() {
         List<Period> periods = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {

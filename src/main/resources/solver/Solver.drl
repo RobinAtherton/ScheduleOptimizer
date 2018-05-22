@@ -23,7 +23,7 @@ rule "noSameRoomAtSameTime"
         $rightLesson : Lesson(room == $leftRoom,
             coupledCollides($leftLesson))
     then
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
+        scoreHolder.addHardConstraintMatch(kcontext, -2);
 end
 
 rule "noLecturerAtSameTime"
