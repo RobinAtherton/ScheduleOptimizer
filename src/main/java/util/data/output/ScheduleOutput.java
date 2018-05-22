@@ -8,6 +8,7 @@ import util.helpers.own.container.LessonContainer;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.rmi.MarshalledObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class ScheduleOutput {
         }
     }
 
-    public static void printLessonsBySemester(ScheduleSolution scheduleSolution, File file) throws Exception {
+    public static void printLessonsBySemester1(ScheduleSolution scheduleSolution, File file) throws Exception {
         Map<String, List<Lesson>> schedule = ScheduleProcessor.sortLessonsToMap(scheduleSolution);
         Map<String, LessonContainer> scheduleByDays = ScheduleProcessor.sortBySemester(schedule);
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -45,6 +46,22 @@ public class ScheduleOutput {
                 bw.write(kek  + semester + kek);
                 bw.newLine();
                 bw.write(lC.toString());
+                bw.flush();
+            }
+        }
+    }
+
+    public static void printLessonsBySemester(ScheduleSolution scheduleSolution, File file) throws Exception {
+        Map<String, List<Lesson>> schedule = ScheduleProcessor.sortLessonsToMap(scheduleSolution);
+        Map<String, LessonContainer> scheduleByDays = ScheduleProcessor.sortBySemester(schedule);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        for (String semester : scheduleByDays.keySet()) {
+            LessonContainer lessonContainer = scheduleByDays.get(semester);
+            if (!lessonContainer.isEmpty()) {
+                bw.write(kek + semester + kek);
+                bw.newLine();
+                bw.write(lessonContainer.parallelPrint());
+                bw.newLine();
                 bw.flush();
             }
         }

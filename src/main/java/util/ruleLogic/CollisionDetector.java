@@ -14,7 +14,6 @@ public class CollisionDetector {
     private static boolean COLLISION = true;
     private static boolean NO_COLLISION = false;
 
-
     //Refactored FWPM collision
     public static boolean extensiveCollision(Lesson left, Lesson right) {
         if (timedCollision(left, right)) {
@@ -37,25 +36,6 @@ public class CollisionDetector {
             }
         }
         return NO_COLLISION;
-    }
-
-    public static boolean noSameLessonsApartOnSameDay(Lesson lesson) {
-        for (Lesson outer : lesson.getSameDay()) {
-            if (!lesson.equals(outer)) {
-                if (!adjacent(lesson, outer) && lesson.getSubjectName().equals(outer.getSubjectName())) {
-                    return COLLISION;
-                }
-            }
-        }
-        return NO_COLLISION;
-    }
-
-    private static boolean adjacent(Lesson left, Lesson right) {
-       if (left.getHour()+left.getBlockLength() == right.getHour()
-               || right.getHour()+right.getBlockLength() == left.getHour()) {
-            return true;
-       }
-       return false;
     }
 
     private static boolean checkForCapacity(Lesson left, Lesson right) {

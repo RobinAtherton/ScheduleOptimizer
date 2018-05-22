@@ -51,7 +51,7 @@ rule "collidingWithEndOfSchedule"
             $blockLength : blockLength,
             ($hour + $blockLength - 1 > 12))
     then
-        scoreHolder.addHardConstraintMatch(kcontext, -10);
+        scoreHolder.addHardConstraintMatch(kcontext, -4);
 end
 
 
@@ -90,13 +90,6 @@ rule "preventLateFridays"
         $lesson : Lesson(period.getDay() == 5)
     then
         scoreHolder.addSoftConstraintMatch(kcontext, -$lesson.getHour() * 2);
-end
-
-rule "nonAdjacentSameSubjects"
-    when
-        $lesson : Lesson(checkForNonAdjacentLessons())
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, -3);
 end
 
 rule "benefitFreeDays"

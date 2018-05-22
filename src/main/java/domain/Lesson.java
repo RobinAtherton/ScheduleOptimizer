@@ -174,10 +174,6 @@ public class Lesson {
         return CollisionDetector.coupledCollision(this, lesson);
     }
 
-    public boolean checkForNonAdjacentLessons() {
-        return CollisionDetector.noSameLessonsApartOnSameDay(this);
-    }
-
     public int checkForCompactness() {
         return CollisionDetector.checkCompactness(this);
     }

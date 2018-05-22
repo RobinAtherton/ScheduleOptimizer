@@ -7,6 +7,11 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 public class PeriodShiftingVariableListener implements VariableListener<Lesson> {
 
     @Override
+    public boolean requiresUniqueEntityEvents() {
+        return true;
+    }
+
+    @Override
     public void beforeEntityAdded(ScoreDirector scoreDirector, Lesson lesson) {
     }
 

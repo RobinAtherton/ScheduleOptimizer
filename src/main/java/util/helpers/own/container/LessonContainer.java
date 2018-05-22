@@ -2,10 +2,7 @@ package util.helpers.own.container;
 
 import domain.Lesson;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LessonContainer {
 
@@ -53,15 +50,15 @@ public class LessonContainer {
         for (int i = 1; i <= SCHEDULE_LENGTH; i++) {
             output += i + ": ";
             if (!(day.get(i).isEmpty())) {
-                for(Lesson lesson : day.get(i)) {
+                for (Lesson lesson : day.get(i)) {
                     output += lesson.getCourse().getSubject().getShortName() + "[" + lesson.getBlockLength() + "]" + flagify(lesson)
-                            + " ";
+                            + ";";
                 }
             } else {
                 output += "N";
             }
-            output += "\n";
-            while(output.contains("  ")) {
+            output += "##";
+            while (output.contains("  ")) {
                 output = output.replace("  ", " ");
             }
         }
@@ -74,38 +71,105 @@ public class LessonContainer {
         int amount = 0;
         if (lesson.getUKWFlag()) {
             amount++;
-            output+="(UKW)";
+            output += "(UKW)";
         }
         if (lesson.getGKWFlag()) {
             if (amount > 0) {
                 output += ",";
                 amount++;
             }
-            output+="(GKW)";
+            output += "(GKW)";
         }
         if (!lesson.getGroupList().isEmpty()) {
             if (amount > 0) {
                 output += ",";
                 amount++;
             }
-            output+="(" + lesson.getGroupList().toString() + ")";
+            output += lesson.getGroupList().toString();
         }
         if (lesson.isFWPM()) {
             if (amount > 0) {
                 output += ",";
                 amount++;
             }
-            output+="(FWPM)";
+            output += "(FWPM)";
         }
         if (lesson.getAltId() != 0) {
             if (amount > 0) {
                 output += ",";
                 amount++;
             }
-            output+="(" + lesson.getAltId() + ")";
+            output += "(" + lesson.getAltId() + ")";
         }
-        output+="}";
+        output += "}";
         return output;
+    }
+
+    private String stringifyHour(Map<Integer, List<Lesson>> day, int hour) {
+        String output = "";
+        for (Lesson lesson : day.get(hour)) {
+            if (!day.get(hour).isEmpty()) {
+                output += lesson.getCourse().getSubject().getShortName() + "[" + lesson.getBlockLength() + "]" + flagify(lesson)+ ";";
+            } else {
+                output += "N";
+            }
+            while (output.contains("  ")) {
+                output = output.replace("  ", " ");
+            }
+        }
+        return output;
+    }
+
+    public String parallelPrint() {
+        int max = getMaxLength();
+        String[] monday = stringify(schedule.get(MONDAY)).split("##");
+        String[] tuesday = stringify(schedule.get(TUESDAY)).split("##");
+        String[] wednesday = stringify(schedule.get(WEDNESDAY)).split("##");
+        String[] thursday = stringify(schedule.get(THURSDAY)).split("##");
+        String[] friday = stringify(schedule.get(FRIDAY)).split("##");
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 12; i++) {
+            sb.append(getWhiteSpaced(monday[i], max))
+                    .append(getWhiteSpaced(tuesday[i], max))
+                    .append(getWhiteSpaced(wednesday[i], max))
+                    .append(getWhiteSpaced(thursday[i], max))
+                    .append(friday[i]);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    private int getMaxLength() {
+        int max = 0;
+        String s;
+        for (int i = 1; i <= 12; i++) {
+            s = stringifyHour(schedule.get(MONDAY), i);
+            if (s.length() > max) {
+                max = s.length();
+            }
+            s = stringifyHour(schedule.get(TUESDAY), i);
+            if (s.length() > max) {
+                max = s.length();
+            }
+            s = stringifyHour(schedule.get(WEDNESDAY), i);
+            if (s.length() > max) {
+                max = s.length();
+            }
+            s = stringifyHour(schedule.get(THURSDAY), i);
+            if (s.length() > max) {
+                max = s.length();
+            }
+        }
+        return max;
+    }
+
+    private String getWhiteSpaced(String string, int max) {
+        int whites = Math.abs(string.length()-max-6);
+        for (int i = 0; i < whites; i++) {
+            string += " ";
+        }
+        return string;
     }
 
     public String toString() {
