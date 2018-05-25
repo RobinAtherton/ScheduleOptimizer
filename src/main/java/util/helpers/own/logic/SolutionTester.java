@@ -209,7 +209,7 @@ public class SolutionTester {
         int preferences = 0;
         for (Lesson outer : solution.getLessons()) {
             for (Preference inner : solution.getPreferences()) {
-                if (CollisionDetector.getPreferenceCollision(outer, inner)) {
+                if (CollisionDetector.preferenceCollision(outer, inner)) {
                     if (!(passed.contains(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour()))) {
                         String tempC = "";
                         if (inner.getConstraint() > 0) {

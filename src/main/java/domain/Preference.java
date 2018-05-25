@@ -50,6 +50,10 @@ public class Preference {
         this.lecturer = lecturer;
     }
 
+    public String getLecturerName() {
+        return lecturer.getShortName();
+    }
+
     public String toString() {
         if(!this.type.equals(PreferenceType.L)) {
             return this.lecturer.getShortName() + " " + this.getDay() + " " + this.getHour() + " " + this.constraint;

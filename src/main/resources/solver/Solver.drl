@@ -58,10 +58,10 @@ end
 //#####################SOFT_CONSTRAINTS#####################
 rule "preferenceBroken"
     when
-        $rightPreference : Preference(constraint < 0)
+        $rightPreference : Preference($constraint : constraint)
         $leftLesson : Lesson(prefCollides($rightPreference))
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, -6);
+        scoreHolder.addSoftConstraintMatch(kcontext, $constraint * 5);
 end
 
 rule "avoidDaysWithOneLesson"
@@ -85,6 +85,8 @@ rule "scheduleEarlyness"
         scoreHolder.addSoftConstraintMatch(kcontext, -$lesson.getHour());
 end
 
+
+//Potentially Unnecessary
 rule "preventLateFridays"
     when
         $lesson : Lesson(period.getDay() == 5)

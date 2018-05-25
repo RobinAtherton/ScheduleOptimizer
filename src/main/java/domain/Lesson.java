@@ -167,7 +167,7 @@ public class Lesson {
     }
 
     public boolean prefCollides(Preference preference) {
-        return CollisionDetector.getPreferenceCollision(this, preference);
+        return CollisionDetector.preferenceCollision(this, preference);
     }
 
     public boolean coupledCollides(Lesson lesson) {

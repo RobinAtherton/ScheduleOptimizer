@@ -4,7 +4,6 @@ import domain.Lesson;
 import domain.Period;
 import domain.Preference;
 import domain.Student;
-import org.apache.commons.math3.genetics.NPointCrossover;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,8 @@ public class CollisionDetector {
         }
         return NO_COLLISION;
     }
+
+
 
     private static boolean checkForCapacity(Lesson left, Lesson right) {
         int leftSize = left.getCourse().getSemester().getCapacity();
@@ -169,17 +170,9 @@ public class CollisionDetector {
         }
     }
 
-    //TODO Review PreferenceCollision
-    public static boolean getPreferenceCollision(Lesson lesson, Preference preference) {
-        if (isPreferenceBlockColliding(lesson, preference)) {
-            return COLLISION;
-        }
-        return NO_COLLISION;
-    }
-
     //Refactored PreferenceCollision
-    private static boolean isPreferenceBlockColliding(Lesson lesson, Preference preference) {
-        if (lesson.getLecturerName().equals(preference.getLecturer().getShortName())
+    public static boolean preferenceCollision(Lesson lesson, Preference preference) {
+        if (lesson.getLecturerName().equals(preference.getLecturerName())
                 && lesson.getDay() == preference.getDay()) {
             for (int i = 0; i < lesson.getBlockLength(); i++) {
                 if (lesson.getPeriod().getHour() + i == preference.getHour()) {

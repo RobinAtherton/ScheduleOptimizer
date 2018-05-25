@@ -14,9 +14,9 @@ import java.util.Objects;
 
 public class CoupledLessonChangeMove extends AbstractMove<ScheduleSolution> {
 
-    Lesson lesson;
-    Period toPeriod;
-    Period previousPeriod;
+    private final Lesson lesson;
+    private final Period toPeriod;
+    private Period previousPeriod;
 
     public CoupledLessonChangeMove(Lesson lesson, Period period) {
         this.lesson = lesson;
