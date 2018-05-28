@@ -22,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         ScheduleSolution scheduleSolution = new ScheduleSolution();
-        Initializer.init(scheduleSolution, FILTERED_MODE);
+        Initializer.init(scheduleSolution, NORMAL_MODE);
 
         ScheduleSolution before = new ScheduleSolution(scheduleSolution);
 

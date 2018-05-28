@@ -29,6 +29,7 @@ public class PeriodShiftingVariableListener implements VariableListener<Lesson> 
         ConsistencyLogic.updateSameDay(scoreDirector, lesson);
         ConsistencyLogic.updateFWPMBlockedList(scoreDirector, lesson);
         ConsistencyLogic.updatePracticalBlockedList(scoreDirector, lesson);
+       // ConsistencyLogic.updateGroupBlockedList(scoreDirector, lesson);
     }
 
     @Override

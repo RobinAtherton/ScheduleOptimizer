@@ -28,7 +28,6 @@ public class DomainProcessor {
         assertDodgeable(lessons);
         assertSameSemester(lessons);
         assertBlockedLessons(lessons);
-        assertGroupDodgeable(lessons);
     }
 
     public static void assertFlags(List<Lesson> lessons, List<Student> students) throws IOException {
@@ -46,7 +45,6 @@ public class DomainProcessor {
         assertDodgeable(lessons);
         assertSameSemester(lessons);
         assertBlockedLessons(lessons);
-        assertGroupDodgeable(lessons);
     }
 
     private static void assertPrimaryFlags(List<Lesson> lessons) {
@@ -351,50 +349,6 @@ public class DomainProcessor {
                     }
                 }
             }
-        }
-    }
-
-    private static void assertGroupDodgeable(List<Lesson> lessons) {
-        for (Lesson outer : lessons) {
-            for (Lesson inner : lessons) {
-                if (outer.getId() != inner.getId()
-                        && outer.getSubjectName().equals(inner.getSubjectName())) {
-                    groupDodgeableHelper(outer, inner);
-                }
-            }
-        }
-    }
-
-    private static void groupDodgeableHelper(Lesson left, Lesson right) {
-        if (left.getGroupList().size() == 0 && right.getGroupList().size() == 0) {
-            // do nothing
-        } else if (left.getGroupList().size() == 1) {
-            if (!right.getGroupList().contains(left.getGroupList().toString())) {
-                groupDodgeHelp(left, right);
-            }
-        } else if (right.getGroupList().size() == 1) {
-            if (!left.getGroupList().contains(right.getGroupList().toString())) {
-                groupDodgeHelp(left, right);
-            }
-        } else {
-            int counter = 0;
-            for (String outer: left.getGroupList()) {
-                for (String inner : right.getGroupList()) {
-                    if (inner.equals(outer)) {
-                        counter++;
-                    }
-                }
-                if (counter == 0) {
-                    groupDodgeHelp(left, right);
-                }
-            }
-        }
-    }
-
-    private static void groupDodgeHelp(Lesson left, Lesson right) {
-        if (!right.getGroupDodgeable().contains(left) && !left.getGroupDodgeable().contains(right)) {
-            right.getGroupDodgeable().add(left);
-            left.getGroupDodgeable().add(right);
         }
     }
 }

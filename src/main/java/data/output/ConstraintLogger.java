@@ -29,7 +29,8 @@ public class ConstraintLogger {
         System.out.println("################################################################");
         printLecturerCollisions();
         printRoomCollisions();
-        printColliding();
+        //printColliding();
+        printBruteColliding();
         System.out.println("################################################################");
         System.out.println("-----------------------Soft Constraints-------------------------");
         System.out.println("################################################################");
@@ -78,6 +79,39 @@ public class ConstraintLogger {
         } else {
             System.out.println("Collisions detected: " + collisions);
         }
+        System.out.println("\n");
+    }
+
+    private static void printBruteColliding() {
+        System.out.println("Collisions: ");
+        int collisions = 0;
+        for (Lesson outer : solution.getLessons()) {
+            for (Lesson inner : solution.getLessons()) {
+                if (CollisionDetector.extensiveCollision(outer, inner)) {
+                    if (outer.getCourse().getSemester().getShortName().equals(inner.getCourse().getSemester().getShortName())) {
+                        System.out.println("\t" + "Colliding: " + outer.getId() + " " + inner.getId());
+                        System.out.println("\t" + outer.toString() + "\t" + inner.toString());
+                        System.out.println("\t" + "GKW: " + outer.getGKWFlag() + " " + inner.getGKWFlag());
+                        System.out.println("\t" + "UKW: " + outer.getUKWFlag() + " " + inner.getUKWFlag());
+                        System.out.println("\t" + "ALT: " + outer.getAltId() + " " + inner.getAltId());
+                        System.out.println("\t" + "FWPM: " + outer.isFWPM() + " " + inner.isFWPM());
+                        System.out.println("\t" + "COLLISIONREASON: " + inner.getCollisionReason());
+                        List<Student> collidingStudents = new ArrayList<>();
+                        for (Student outerStud : outer.getFWPMStudents()) {
+                            for (Student innerStud : inner.getFWPMStudents()) {
+                                if (outerStud.equals(innerStud) && !collidingStudents.contains(outerStud)) {
+                                    collidingStudents.add(outerStud);
+                                }
+                            }
+                        }
+                        System.out.println("\t" + "CollidingStudents: " + collidingStudents);
+                        System.out.println("\n");
+                        collisions++;
+                    }
+                }
+            }
+        }
+        System.out.println("Collisions detected: " + collisions);
         System.out.println("\n");
     }
 

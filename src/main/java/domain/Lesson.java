@@ -34,7 +34,6 @@ public class Lesson {
     private List<Lesson> sameSemester = new ArrayList<>();
     private List<Lesson> coupledLessons = new ArrayList<>();
     private List<Lesson> dodgeableLessons = new ArrayList<>();
-    private List<Lesson> groupDodgeable = new ArrayList<>();
 
     //shadow variables
     private List<Lesson> sameDay = new ArrayList<>();
@@ -252,13 +251,6 @@ public class Lesson {
         this.dodgeableLessons = dodgeableLessons;
     }
 
-    public List<Lesson> getGroupDodgeable() {
-        return groupDodgeable;
-    }
-
-    public void setGroupDodgeable(List<Lesson> groupDodgeable) {
-        this.groupDodgeable = groupDodgeable;
-    }
 
     public void print() {
         System.out.println(toString());
