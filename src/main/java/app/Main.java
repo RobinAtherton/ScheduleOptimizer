@@ -1,30 +1,32 @@
 package app;
 
+import data.output.ScheduleChangeLogger;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
 import org.optaplanner.core.api.solver.event.SolverEventListener;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import util.data.output.ScheduleOutput;
-import util.helpers.own.logic.Initializer;
-import util.helpers.own.logic.SolutionTester;
+import data.output.ScheduleTablePrinter;
+import data.input.Initializer;
+import data.output.ConstraintLogger;
 
 import java.io.File;
 
 public class Main {
 
     private static String SOLVER_CONFIG_XML = "solver/SolverConfig.xml";
-    private static String OUTPUT_PATH = "src/main/resources/util/data/output/";
+    private static String OUTPUT_PATH = "src/main/resources/data/output/";
     private static int NORMAL_MODE = 0;
     private static int FILTERED_MODE = 1;
 
     public static void main(String[] args) throws Exception {
         ScheduleSolution scheduleSolution = new ScheduleSolution();
-        Initializer.init(scheduleSolution, NORMAL_MODE );
-        SolutionTester.logSolution();
+        Initializer.init(scheduleSolution, FILTERED_MODE);
+
+        ScheduleSolution before = new ScheduleSolution(scheduleSolution);
+
+        ConstraintLogger.logSolution();
         final Solver solver = SolverFactory.createFromXmlResource(SOLVER_CONFIG_XML).buildSolver();
         ScoreDirectorFactory scoreDirectorFactory = solver.getScoreDirectorFactory();
         ScoreDirector scoreDirector = scoreDirectorFactory.buildScoreDirector();
@@ -42,20 +44,20 @@ public class Main {
             }
         });
 
-        solve(scheduleSolution, solver);
+        ScheduleSolution after = solve(scheduleSolution, solver);
+
+        ScheduleChangeLogger comparator = new ScheduleChangeLogger(before, after);
+        comparator.log();
     }
 
-    private static void solve(final ScheduleSolution scheduleSolution, Solver solver) throws Exception {
-        ScheduleOutput.printScheduleToFile(scheduleSolution, new File(OUTPUT_PATH + "SchedulePreSolving.txt"));
-        ScheduleOutput.printLessonsBySemester(scheduleSolution, new File(OUTPUT_PATH + "LessonsPreSolving.txt"));
+    private static ScheduleSolution solve (final ScheduleSolution scheduleSolution, Solver solver) throws Exception {
+        ScheduleTablePrinter.printLessonsBySemester(scheduleSolution, new File(OUTPUT_PATH + "SchedulePreSolving.txt"));
         solver.solve(scheduleSolution);
         ScheduleSolution bestSolution = (ScheduleSolution) solver.getBestSolution();
-        ScheduleOutput.printScheduleToFile(bestSolution, new File(OUTPUT_PATH + "SchedulePostSolving.txt"));
-        ScheduleOutput.printLessonsBySemester(bestSolution, new File(OUTPUT_PATH + "LessonsPostSolving.txt"));
-        SolutionTester.init(bestSolution);
-        SolutionTester.logSolution();
+        ScheduleTablePrinter.printLessonsBySemester(bestSolution, new File(OUTPUT_PATH + "SchedulePostSolving.txt"));
+        ConstraintLogger.init(bestSolution);
+        ConstraintLogger.logSolution();
         System.out.println(bestSolution.getScore());
+        return bestSolution;
     }
-
-
 }

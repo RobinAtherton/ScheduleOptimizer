@@ -24,6 +24,21 @@ public class ScheduleSolution {
     private List<Preference> preferences;
     private List<Student> students;
 
+    public ScheduleSolution() {
+
+    }
+
+    public ScheduleSolution(ScheduleSolution anotherSolution) {
+        this.lecturers = anotherSolution.getLecturers();
+        this.lessons = anotherSolution.getLessons();
+        this.rooms = anotherSolution.getRooms();
+        this.semesters = anotherSolution.getSemesters();
+        this.subjects = anotherSolution.getSubjects();
+        this.periods = anotherSolution.getPeriods();
+        this.courses = anotherSolution.getCourses();
+        this.preferences = anotherSolution.getPreferences();
+        this.students = anotherSolution.getStudents();
+    }
 
     private HardSoftScore score;
 

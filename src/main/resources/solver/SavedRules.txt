@@ -147,7 +147,7 @@ rule "FWPMCollision"
         scoreHolder.addSoftConstraintMatch(kcontext, -1);
 end
 
-            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.SynchronizeDayFactory</moveListFactoryClass></moveListFactory>
+            <moveListFactory><moveListFactoryClass>optaplanner.moves.SynchronizeDayFactory</moveListFactoryClass></moveListFactory>
 
 
 rule "benefitFreeDays"

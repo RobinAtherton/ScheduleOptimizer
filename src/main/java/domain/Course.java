@@ -42,4 +42,8 @@ public class Course {
     public String toString() {
         return lecturer.getShortName() + " " + subject.getShortName() + " " + semester.getShortName();
     }
+
+    public int toHash() {
+        return (lecturer.getShortName() + subject.getShortName() + semester.getShortName()).hashCode();
+    }
 }

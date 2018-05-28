@@ -11,8 +11,8 @@
     <localSearch>
             <localSearchType>TABU_SEARCH</localSearchType>
         <unionMoveSelector>
-            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.ResistantSwapMoveFactory</moveListFactoryClass></moveListFactory>
-            <moveListFactory><moveListFactoryClass>util.helpers.optaplanner.moves.CoupledLessonChangeMoveFactory</moveListFactoryClass></moveListFactory>
+            <moveListFactory><moveListFactoryClass>optaplanner.moves.ResistantSwapMoveFactory</moveListFactoryClass></moveListFactory>
+            <moveListFactory><moveListFactoryClass>optaplanner.moves.CoupledLessonChangeMoveFactory</moveListFactoryClass></moveListFactory>
         </unionMoveSelector>
     </localSearch>
 
