@@ -28,6 +28,8 @@ public class DomainProcessor {
         assertDodgeable(lessons);
         assertSameSemester(lessons);
         assertBlockedLessons(lessons);
+        //optional
+        cleanUpFwpmAttendees(students);
     }
 
     public static void assertFlags(List<Lesson> lessons, List<Student> students) throws IOException {
@@ -45,6 +47,8 @@ public class DomainProcessor {
         assertDodgeable(lessons);
         assertSameSemester(lessons);
         assertBlockedLessons(lessons);
+        //optional
+        cleanUpFwpmAttendees(students);
     }
 
     private static void assertPrimaryFlags(List<Lesson> lessons) {
@@ -351,5 +355,16 @@ public class DomainProcessor {
             }
         }
     }
+
+    private static void cleanUpFwpmAttendees(List<Student> students) {
+        Iterator<Student> iterator = students.iterator();
+        while (iterator.hasNext()) {
+            Student inner = iterator.next();
+            if (inner.getAttendedFWPM().size() > 3) {
+                iterator.remove();
+            }
+        }
+    }
+
 }
 

@@ -129,7 +129,6 @@ public class CollisionDetector {
         }
     }
 
-
     //TODO Review
     //Refactored Collision Code--------------------------------------------TO IMPLEMENT----------------------------------------------------------
     public static boolean isColliding(Lesson left, Lesson right) {

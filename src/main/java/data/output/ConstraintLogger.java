@@ -8,7 +8,9 @@ import domain.Student;
 import logic.CollisionDetector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConstraintLogger {
 
@@ -34,7 +36,8 @@ public class ConstraintLogger {
         System.out.println("################################################################");
         System.out.println("-----------------------Soft Constraints-------------------------");
         System.out.println("################################################################");
-        printPreferenceCollisions();
+        //printPreferenceCollisions();
+        printPreferenceCollisionFormated();
         printOnlyLessons();
         //printSoftColliding();
 
@@ -251,11 +254,9 @@ public class ConstraintLogger {
                         } else {
                             tempC = "Negativ.";
                         }
-                        if (inner.getConstraint() < 0) {
-                            System.out.println("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getCourse().getSubject().getShortName() +
-                                    "\t" + "\t" + inner.getLecturer().getShortName() + " at Day: " + inner.getDay() + " and Hour: " + inner.getHour() + " " + outer.getCourse().getSemester().getShortName() + " " + tempC);
-                            preferences++;
-                        }
+                        System.out.println("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getCourse().getSubject().getShortName() +
+                                "\t" + "\t" + inner.getLecturer().getShortName() + " at Day: " + inner.getDay() + " and Hour: " + inner.getHour() + " " + outer.getCourse().getSemester().getShortName() + " " + tempC);
+                        preferences++;
                         passed.add(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour());
                     }
                 }
@@ -265,6 +266,47 @@ public class ConstraintLogger {
             System.out.println("No Preference Collisions detected.");
         } else {
             System.out.println("Preference Collisions detected: " + preferences);
+        }
+        System.out.println("\n");
+    }
+
+    private static void printPreferenceCollisionFormated() {
+        System.out.println("Preference Collisions: ");
+        List<String> passed = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("POSITIVE", new ArrayList<String>());
+        map.put("NEGATIVE", new ArrayList<String>());
+        int preferences = 0;
+        for (Lesson outer : solution.getLessons()) {
+            for (Preference inner : solution.getPreferences()) {
+                if (CollisionDetector.preferenceCollision(outer, inner)) {
+                    if (!(passed.contains(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour()))) {
+                        if (inner.getConstraint() > 0) {
+                            map.get("POSITIVE").add("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
+                                    + inner.getLecturerName() + " at [" + inner.getDay() + "," + inner.getHour() + "] " + outer.getSemesterName());
+                        } else {
+                            map.get("NEGATIVE").add("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
+                                    + inner.getLecturerName() + " at [" + inner.getDay() + "," + inner.getHour() + "] " + outer.getSemesterName());
+                        }
+                        passed.add(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour());
+                    }
+                }
+            }
+        }
+        if (passed.isEmpty()) {
+            System.out.println("No Preference Collisions detected.");
+        } else {
+            System.out.println("\t" + "Positive Preferences:");
+            for (String collision : map.get("POSITIVE")) {
+                System.out.println(collision);
+            }
+            System.out.println("\n");
+            System.out.println("\t" + "Negative Preferences:");
+            for (String collision : map.get("NEGATIVE")) {
+                System.out.println(collision);
+            }
+            int size = map.get("NEGATIVE").size() + map.get("POSITIVE").size();
+            System.out.println("\t" + "Preference Collisions: " + size);
         }
         System.out.println("\n");
     }
@@ -299,7 +341,7 @@ public class ConstraintLogger {
                 if (!passed.contains(lesson)) {
                     System.out.println("\t" + lesson.toString() + " at: " + lesson.getPeriod().toString());
                     passed.add(lesson);
-                    for (Lesson inner :lesson.getCoupledLessons()) {
+                    for (Lesson inner : lesson.getCoupledLessons()) {
                         System.out.println("\t" + "\t" + inner.toString() + " at: " + lesson.getPeriod().toString());
                         passed.add(inner);
                     }

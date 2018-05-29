@@ -20,7 +20,7 @@ global HardSoftScoreHolder scoreHolder;
 rule "noSameRoomAtSameTime"
     when
         $leftLesson : Lesson($leftRoom : room)
-        $rightLesson : Lesson(room == $leftRoom,
+        $rightLesson : Lesson(room == $leftRoom, room != "NO_ROOM",
             coupledCollides($leftLesson))
     then
         scoreHolder.addHardConstraintMatch(kcontext, -6);
@@ -61,7 +61,7 @@ rule "preferenceBroken"
         $rightPreference : Preference($constraint : constraint)
         $leftLesson : Lesson(prefCollides($rightPreference))
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, $constraint * 5);
+        scoreHolder.addSoftConstraintMatch(kcontext, $constraint * 13);
 end
 
 rule "avoidDaysWithOneLesson"
@@ -106,7 +106,6 @@ rule "benefitFreeDays"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 3);
 end
-
 
 rule "tryForFriday"
     when

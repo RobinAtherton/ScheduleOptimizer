@@ -17,6 +17,6 @@
     </localSearch>
 
     <termination>
-        <secondsSpentLimit>120</secondsSpentLimit>
+        <secondsSpentLimit>1000</secondsSpentLimit>
     </termination>
 </solver>

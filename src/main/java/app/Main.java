@@ -1,6 +1,7 @@
 package app;
 
 import data.output.ScheduleChangeLogger;
+import data.output.UntisExporter;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
@@ -17,6 +18,7 @@ public class Main {
 
     private static String SOLVER_CONFIG_XML = "solver/SolverConfig.xml";
     private static String OUTPUT_PATH = "src/main/resources/data/output/";
+    private static String REFACTORED_PATH = "src/main/resources/data/input/refactored/";
     private static int NORMAL_MODE = 0;
     private static int FILTERED_MODE = 1;
 
@@ -44,6 +46,7 @@ public class Main {
             }
         });
 
+        UntisExporter.export(scheduleSolution.getLessons(), REFACTORED_PATH + "Lessons.csv", OUTPUT_PATH + "PreLessons.txt");
         ScheduleSolution after = solve(scheduleSolution, solver);
 
         ScheduleChangeLogger comparator = new ScheduleChangeLogger(before, after);
@@ -55,6 +58,7 @@ public class Main {
         solver.solve(scheduleSolution);
         ScheduleSolution bestSolution = (ScheduleSolution) solver.getBestSolution();
         ScheduleTablePrinter.printLessonsBySemester(bestSolution, new File(OUTPUT_PATH + "SchedulePostSolving.txt"));
+        UntisExporter.export(bestSolution.getLessons(), REFACTORED_PATH + "Lessons.csv", OUTPUT_PATH + "Lessons.txt");
         ConstraintLogger.init(bestSolution);
         ConstraintLogger.logSolution();
         System.out.println(bestSolution.getScore());
