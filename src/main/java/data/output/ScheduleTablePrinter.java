@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ScheduleTablePrinter {
 
-    private static String kek = "---------------------------------------------------";
+    private static String separator = "---------------------------------------------------";
     //Broken
     public static void printScheduleToFile(ScheduleSolution scheduleSolution, File file) throws Exception {
         Map<String, List<Lesson>> schedule = ScheduleProcessor.sortLessonsToMap(scheduleSolution);
@@ -39,7 +39,7 @@ public class ScheduleTablePrinter {
         for (String semester : scheduleByDays.keySet()) {
             LessonContainer lessonContainer = scheduleByDays.get(semester);
             if (!lessonContainer.isEmpty()) {
-                bw.write(kek + semester + kek);
+                bw.write(separator + semester + separator);
                 bw.newLine();
                 bw.write(lessonContainer.parallelPrint());
                 bw.newLine();

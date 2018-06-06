@@ -1,0 +1,307 @@
+"dkoma","Datenkommunikation",,,,,,,,,,,,,1.00000,,,,,,"AIF412",,,#n
+"wre","Wirtschaftsrecht",,,,,,,,,,,,,1.00000,,,,,,"SEW30",,,#n
+"ia","Internetanwendungen",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"pswa","Prakt. SW-Architekturen",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"swa","Softwarearchitekturen",,,,,,,,,,,,,1.00000,,,,,,"AIF612",,,#n
+"üitpm","Übung IT-Projektmgmt",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"itpm","IT-Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"WIF510",,,#n
+"j2ee","Java 2 EE",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"prob","Prakt. Robotik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"swemb","SW Eng. embedded Systeme",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"swq","Software Qualität",,,,,,,,,,,,,1.00000,,,,,,"IM440",,,#n
+"awpf","Wahlpflichtfächer",,,,,,,,9,,,,,1.00000,"siehe Aushang",,0,16777215,,,,,#n
+"bwl","Einführung BW",,,,,,,,9,,,,,1.00000,,,0,16777215,,"WIF150",,,#n
+"lux","Systemprog. GNU/Linux",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"xml","Java (thin clients)",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"sp","Studienprojekte",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"üprg","Übung Programmieren",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"dpup","Design Pattern / UP",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"CC","Cross Cultural PM",,,,,,,,,,,,,1.00000,,,0,16777215,,"SE30",,,#n
+"ims","Integrierte Managementsysteme",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"nntz","Neuronale Netze",,,,,,,,9,,,,,1.00000,,"AW13",0,16777215,,,,,#n
+"praes","Präsentation und Kommunikation",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB440",,,#n
+"tm","Technische Mechanik",,,,,,,,9,,,,,1.00000,,"E1",0,16777215,,"AIF150",,,#n
+"kue","Konstr. u.  Entwicklung",,,,,,,,,,,,,1.00000,,,,,,"AIF350",,,#n
+"preg","Prakt. Regelungstechnik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"reg","Regelungstechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF340",,,#n
+"pmbe","Prakt. Modellb. Entwicklung",,"IF013",,,,,,,,,,,1.00000,,,,,,".",,,#n
+"mbe1","Modellbasierte Entwicklung 1",,,,,,,,,,,,,1.00000,,,,,,"AIF312",,,#n
+"ütm","Üb. techn. Mechanik",,,,,,,,9,,,,,1.00000,,"E1",0,16777215,,".",,,#n
+"üet","Übung E-technik",,,,,,,,9,,,,,1.00000,,"E1",0,16777215,,".",,,#n
+"ügdwi","Übung G.d. Wirtschaftsinformatik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"gdwi","Grundl. der Wirtschaftsinformatik",,,,,,,,,,,,,1.00000,,,,,,"WIF140",,,#n
+"pet","Prakt. E-technik",,,,,,,,9,,,,,1.00000,,"E2",0,16777215,,".",,,#n
+"uet","Übung Elektrotech.",,,,,,,,9,,,,,1.00000,,"E2",0,16777215,,".",,,#n
+"üphy","Übung Physik",,"BS102",,,,,,9,,,,,1.00000,,"E2",0,16777215,,".",,,#n
+"wst","Werkstofftechnik",,,,,,,,9,,,,,1.00000,,"E2",0,16777215,,,,,#n
+"prxs","Praxisseminar",,,,,,,,9,,,,,1.00000,,"E3",0,16777215,,,,,#n
+"dig","Digitaltechnik",,,,,,,,9,,,,,1.00000,,"I1",0,16777215,,"IB020",,,#n
+"pswemb","Prakt. emb. SW. Eng.",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pebe","Prakt. elekt. BE.",,,,,,,,9,,,,,1.00000,,"E4",0,16777215,,".",,,#n
+"pemt","Prakt. Meßtechnik",,,,,,,,9,,,,,1.00000,,"E4",0,16777215,,".",,,#n
+"syse","Systementwurf",,,,,,,,9,,,,,1.00000,,"E7ME",0,16777215,,,,,#n
+"üsyse","Üb. Systementwurf",,,,,,,,9,,,,,1.00000,"in München","E7ME",0,16777215,,".",,,#n
+"mod","Mod.kompl. Systeme",,"TI119",,,,,,9,,,,,1.00000,,"FWPF",0,16777215,,,,,#n
+"sec","IT-Sicherheit",,,,,,,,9,,,,,1.00000,,"FWPF",0,16777215,,"IB360",,,#n
+"pgti","Prakt. Grundl. theoretische Informatik",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"gti","Grundlagen theoretische Informatik",,,,,,,,9,,,,,1.00000,,"I1",0,16777215,,"IB015",,,#n
+"mat1","Mathematik I",,,"H",,,,,9,,,,,1.00000,,"I1",0,16777215,,"IB030",,,#n
+"pmat","Prakt. Mathematik",,"IF016",,,,,,9,,,,,1.00000,,"I1",0,16777215,,".",,,#n
+"latex","LaTeX",,"IF016",,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"pproz","Prakt. Prozessrechentechnik",,"IF013",,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"proz","Prozessrechentechnik",,,,,,,,,,,,,1.00000,,,0,16777215,,"IB700",,,#n
+"psim","Prozess-Simulation",,,,,,,,9,,,,,1.00000,,"I1",0,16777215,,"SE32",,,#n
+"ümat","Übung Mathematik",,,,,,,,9,,,,,1.00000,,"I1",0,16777215,,".",,,#n
+"algo","Algorithmen und Datenstrukturen",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB330",,,#n
+"dvs","DV-Systeme",,,"H",,,,,9,,,,,1.00000,,"I2",0,16777215,,,,,#n
+"eng","Englisch",,"TI105",,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB080",,,#n
+"mat2","Mathematik II",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB040",,,#n
+"pphys","Prakt. Physik",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"phys","Angewandte Physik",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"AIF241",,,#n
+"palgo","Prakt. Algorithmen u. Datenstrukturen",,"IF016",,,,,,,,,,,1.00000,,"I2",0,16777215,,".",,,#n
+"pdvs","Prakt. DV-Systeme",,"IF016",,,,,,,,,,,1.00000,,"I2",0,16777215,,".",,,#n
+"pprg","Prakt. Programmieren",,"IF016",,,,,,9,,,,,1.00000,,"I2",0,16777215,,".",,,#n
+"prg2","Programmieren II",,,,,,,,,,,,,1.00000,,"I2",0,16777215,,"IB250",,,#n
+"prg1","Programmieren I",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB150",,,#n
+"ppops","Prakt. p.o.Progr.",,,,,,,,9,,,,,1.00000,,"I3",0,16777215,,".",,,#n
+"pops","Probl.o. Programm.",,,,,,,,9,,,,,1.00000,,"I3",0,16777215,,".",,,#n
+"pdbk","Prakt. Datenbanken",,"IF008",,,,,,9,,,,,1.00000,,"I4",0,16777215,,".",,,#n
+"psprg","Prakt. systemn. Prg.",,"IF018",,,,,,9,,,,,1.00000,,"I4",0,16777215,,".",,,#n
+"prea","Prakt. Rechnerarchitektur",,"IF018",,,,,,9,,,,,1.00000,,"I4",0,16777215,,".",,,#n
+"pswe","Prakt. SW Engineering II",,"IF010",,,,,,9,,,,,1.00000,,"I4",0,16777215,,".",,,#n
+"ptphy","Prakt. tech.Physik",,"IF010",,,,,,9,,,,,1.00000,,"I4",0,16777215,,".",,,#n
+"dbk","Datenbanken",,,,,,,,9,,,,,1.00000,,"I4",0,16777215,,"IB320",,,#n
+"stat","Statistik",,,,,,,,9,,,,,1.00000,,"I4",0,16777215,,"IB430",,,#n
+"bsys","Betriebssysteme",,,,,,,,9,,,,,1.00000,,"I4",0,16777215,,"IB400",,,#n
+"sprg","systemnahe Prog.",,,,,,,,9,,,,,1.00000,,"I4",0,16777215,,,,,#n
+"rete","Rechnertechnik",,,,,,,,9,,,,,1.00000,,"I4",0,16777215,,"IB620",,,#n
+"swe2","Software Engineering II",,,,,,,,,,,,,1.00000,,"I3",0,16777215,,"IB300",,,#n
+"swe1","Software Engineering I",,,,,,,,9,,,,,1.00000,,"I2",0,16777215,,"IB060",,,#n
+"stud","Studienprojekt Seminar",,,,,,,,,,,,,1.00000,,"I4",0,16777215,,,,,#n
+"dkom","Datenkommunikation",,,,,,,,9,,,,,1.00000,,"I5",0,16777215,,"IB420",,,#n
+"num","Numerik",,,,,,,,9,,,,,1.00000,,"I5",0,16777215,,"IB605",,,#n
+"pdkom","Prakt. Datenkommunikation",,"IF008",,,,,,9,,,,,1.00000,,"I5",0,16777215,,".",,,#n
+"pdfv","Prakt. Datenfernv.",,,,,,,,9,,,,,1.00000,,"I5",0,16777215,,".",,,#n
+"pbsys","Prakt. Betriebsysteme",,"IF010",,,,,,9,,,,,1.00000,,"I5",0,16777215,,".",,,#n
+"pnum","Prakt. Numerik",,"IF008",,,,,,9,,,,,1.00000,,"I5",0,16777215,,".",,,#n
+"itr","IT-Recht",,,,,,,,9,,,,,1.00000,,"I6",0,16777215,,"IB530",,,#n
+"tk","Telekommunikation",,,,,,,,,,,,,1.00000,,"I6",0,16777215,,,,,#n
+"mi","Medieninformatik",,,,,,,,9,,,,,1.00000,,"I7",0,16777215,,"IB780",,,#n
+"pmi","Prakt. Medieninformatik",,"IF019",,,,,,,,,,,1.00000,,"I7",0,16777215,,".",,,#n
+"comp","Compiler",,,,,,,,9,,,,,1.00000,,"I7",0,16777215,,"IB610",,,#n
+"dvan","DV-Anwendungen",,,,,,,,9,,,,,1.00000,,"I7",0,16777215,,,,,#n
+"ezs","Echtzeitsysteme",,,,,,,,9,,,,,1.00000,,"I7",0,16777215,,,,,#n
+"bwli","BWL",,,,,,,,9,,,,,1.00000,,"I7",0,16777215,,"IB645",,,#n
+"java","Java II",,,,,,,,,,,,,1.00000,,"I7",0,16777215,,,,,#n
+"pcomp","Prakt. Compiler",,"IF010",,,,,,9,,,,,1.00000,,"I7",0,16777215,,".",,,#n
+"pezs","Prakt. Echtzeits.",,"IF013",,,,,,9,,,,,1.00000,,"I7",0,16777215,,".",,,#n
+"pvs","Prakt. verteilte Systeme",,"IF008",,,,,,,,,,,1.00000,,"I7",0,16777215,,".",,,#n
+"vs","Verteilte Systeme",,,,,,,,,,,,,1.00000,,"I7",0,16777215,,"IB630",,,#n
+"pdvan","Prakt. DV-Anwend.",,"IF019",,,,,,9,,,,,1.00000,,"I8",0,16777215,,".",,,#n
+"psysen","Prakt. Systems Engineering",,"IF020",,,,,,,,,,,1.00000,,"I8",0,16777215,,".",,,#n
+"sysadm","Systemadministration",,"TI119",,,,,,,,,,,1.00000,,"I8",0,16777215,,,,,#n
+"pinf","Prakt.  Informationssyst.",,"IF008",,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"inf","Informationssysteme",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"ogl","Open GL",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"sm","Systems Management",,,,,,,,9,,,,,1.00000,,"I8",0,16777215,,,,,#n
+"am","Arbeitsmethodik",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,,,,#n
+"ppjkt","Prakt. Projektmanagement",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,".",,,#n
+"pma","Projektmanagement",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,"AIF570",,,#n
+"spmod","System- und Prozessmodellierung",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"qm","Qualitäts- /Umweltmanagement",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,"SE29",,,#n
+"syste","Systemtechnik",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,,,,#n
+"umw","Umweltverträglichkeit",,,,,,,,9,,,,,1.00000,,"SE",0,16777215,,,,,#n
+"ik","Kostenr./Marketing",,,,,,,,9,,,,,1.00000,,"SW7",0,16777215,,,,,#n
+"pdk","Prakt. Datenkomm.",,"IF008",,,,,,9,,,,,1.00000,,"SW7",0,16777215,,".",,,#n
+"tv","techn. Vertrieb",,,,,,,,9,,,,,1.00000,,"SW7",0,16777215,,,,,#n
+"im","Industriemarketing",,,,,,,,9,,,,,1.00000,,"SW8",0,16777215,,,,,#n
+"tvmk","t. Vertrieb Marketing",,,,,,,,9,,,,,1.00000,,"SW8",0,16777215,,,,,#n
+"üget","Übung Elektrotechnik",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"get","Grundlagen d. Elektrotechnik",,,,,,,,,,,,,1.00000,,,0,16777215,,"AIF140",,,#n
+"mct","Mikrocomputer",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"aswe","Autom. SW-Entw.",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"sk","Soziale Kompetenz",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"gdi","Grundlagen der Informatik",,,,,,,,,,,,,1.00000,,,0,16777215,,"IB010",,,#n
+"pgdi","Prakt. G.d.Informatik",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"mci","Mensch-Computer-Interaktion",,,,,,,,,,,,,1.00000,,,0,16777215,,"IM220",,,#n
+"pmci","Prakt. Mensch-Computer-Interaktion",,"TI119",,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"uf","Unternehmensführung",,"IF020",,,,,,,,,,,1.00000,,,0,16777215,,"SE28",,,#n
+"ask","Arbeitsmethodik/soziale Kompetenz",,,,,,,,,,,,,1.00000,,,0,16777215,,"SE23",,,#n
+"sem","Seminar",,"TI107",,,,,,,,,,,1.00000,,,0,16777215,,"IB650",,,#n
+"mbse","Modellbas. Systems Engineering",,,,,,,,,,,,,1.00000,,,0,16777215,,"SE039",,,#n
+"it","Internettechnologie",,,,,,,,,,,,,1.00000,,,0,16777215,,"IB640",,,#n
+"itm","IT Management",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"üitm","Übung IT Management",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"skript","Skriptsprachen",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"pskript","Prakt. Skriptsprachen",,,,,,,,,,,,,1.00000,,,0,16777215,,".",,,#n
+"bv","Bildverstehen",,,,,,,,,,,,,1.00000,,,0,16777215,,"IM230",,,#n
+"pbv","Prakt. Bildverstehen",,"TI119",,,,,,,,,,,1.00000,,"I7",0,16777215,,".",,,#n
+"tex","TeX / LaTeX",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"pm","Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"IB540",,,#n
+"iteng","IT-Englisch",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"fui","Finanzen u. Investition",,,,,,,,,,,,,1.00000,,,,,,"WIF250",,,#n
+"pmt","PM-tools",,,,,,,,,,,,,1.00000,,,0,16777215,,,,,#n
+"ksysen","Konzepte des Systems Engineering",,,,,,,,,,,,,1.00000,,,,,,"SE020",,,#n
+"gauto","Grundl. d. Automobiltechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF450",,,#n
+"pebs","Prakt. Echtzeitbetriebss.",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ebs","Echtzeitbetriebssysteme",,,,,,,,,,,,,1.00000,,,,,,"AIF410",,,#n
+"eme","Elektronik u. Messtechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF240",,,#n
+"peme","Prakt. Elekt./Messt.",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"rob","Robotik",,,,,,,,,,,,,1.00000,,,,,,"IM250",,,#n
+"spb","Studienprojekt BA",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"spm","Studienprojekt MA",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"buc","Buchführung",,,,,,,,,,,,,1.00000,,,,,,"WIF150",,,#n
+"itc","IT-Compliance",,,,,,,,,,,,,1.00000,,,,,,"WIF470",,,#n
+"kul","Kosten- u. Leistungsrechnung",,,,,,,,,,,,,1.00000,,,,,,"WIF430",,,#n
+"wip","Wirtschaftspolitik",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"gpo","Geschäftsproz./Organisation",,,,,,,,,,,,,1.00000,,,,,,"WIF360",,,#n
+"wsec","Web Security",,,,,,,,,,,,,1.00000,,,,,,"IM411",,,#n
+"ükue","Übung Konstr. u. Entw.",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"puk","Präsent. und Komm.",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"fwt","Fahrwerktechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF650",,,#n
+"ank","Antriebskonzepte",,,,,,,,,,,,,1.00000,,,,,,"AIF651",,,#n
+"muf","Material- u. Fertigungswirtschaft",,,,,,,,,,,,,1.00000,,,,,,"WIF450",,,#n
+"or","Operations Research",,,,,,,,,,,,,1.00000,,,,,,"WIF460",,,#n
+"por","Prakt. Operations Research",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"syspm","System- u. Prozessmod.",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"üfwt","Übung Fahrwerktechnik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"üank","Übung Antriebskonzepte",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"finf","Fahrzeuginformatik",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"esys","Eingebettete Systeme",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"sens","Sensorik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"psens","Prakt. Sensorik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pgauto","Prakt. Automobiltechnik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"psys","Prakt. Systems Engineering",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"esysen","Einführung Systems Engineering",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"ktec","Karosserietechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF750",,,#n
+"jep","Java Enterprise Platform",,,,,,,,,,,,,1.00000,,,,,,"IM340",,,#n
+"ügif","Übung Grundlagen d. Informatik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"mv","Marketing und Vertrieb",,,,,,,,,,,,,1.00000,,,,,,"SEW4",,,#n
+"elek","Kfz-Elektronik",,,,,,,,,,,,,1.00000,,,,,,"AIF6xx",,,#n
+"pgpo","Prakt. Geschäftsprozesse",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pl","Produktionsorientierte Logistiksysteme",,,,,,,,,,,,,1.00000,,,,,,"SE32",,,#n
+"üprog","Zusatzübung Programmieren",,"IF020",,,,,,,,,,,1.00000,,,,,,,,,#n
+"pit","Prakt. Internettechnologie",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"wisp","Wissenschaftl. Programmieren",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"bul","Beschaffung, Prod. und Logistik",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"swe3","Software Engineering III",,,,,,,,,,,,,1.00000,,,,,,"WIF620",,,#n
+"con","IT-Controlling",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"pcon","Übung IT-Controlling",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"erp","Unternehmenssoftware (ERP)",,,,,,,,,,,,,1.00000,,,,,,"WIF660",,,#n
+"zor","Zusatzübung OR",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"sps","SPS-Programmierung",,,,,,,,,,,,,1.00000,,,,,,"IB730",,,#n
+"psps","Prakt. SPS",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"mbu","E-Business",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"ümb","Übung Mobile Business",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pktec","Prakt. Karrosserietechnik",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"abm","Agent Based Modeling",,,,,,,,,,,,,1.00000,,,,,,"IB770",,,#n
+"em","E-Marketing",,,,,,,,,,,,,1.00000,,,,,,"WIF67x",,,#n
+"üsq","Übung Software Qualität",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ego","E-Government",,,,,,,,,,,,,1.00000,,,,,,"IM960",,,#n
+"mc","Mobile Computing",,,,,,,,,,,,,1.00000,,,,,,"IM940",,,#n
+"itcons","IT Consulting",,,,,,,,,,,,,1.00000,,,,,,"IM930",,,#n
+"rr","Raumbelegung",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"euro","European Law",,,,,,,,,,,,,1.00000,,,,,,"WIF67x",,,#n
+"risik","Risikomanagement",,,,,,,,,,,,,1.00000,,,,,,"WIF67x",,,#n
+"intern","International Controlling",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"pmod","Prozessmodellierung",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"et",,,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"ki","Künstliche Intelligenz",,,,,,,,,,,,,1.00000,,,,,,"IB790",,,#n
+"pwsec","Praktikum Web Security",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"cbpm","Coll. Bus. Process Management",,,,,,,,,,,,,1.00000,,,,,,"IM910",,,#n
+"ücbpm","Übung CBPM",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"üswe","Übung Software Engineering III",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"iti","IT-Infrastrukturen",,,,,,,,,,,,,1.00000,,,,,,"WIF420",,,#n
+"itmc","IT-Management u. Controlling",,,,,,,,,,,,,1.00000,,,,,,"WIF650",,,#n
+"üitmc","Übung IT Mgmt u. Contr.",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"üerp","Übung Unternehmenssoftware",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ingma","Ingenieurmathematik",,,,,,,,,,,,,1.00000,,,,,,"AIF120",,,#n
+"infmod","Informations- und Metamodellierung",,,,,,,,,,,,,1.00000,,,,,,"WIF710",,,#n
+"pinfmod","Übung I. und M. modellierung",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"om","Operations Management",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"ümv","Übung Marketing/Vertrieb",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"mbe2","Modellbasierte Entwicklung 2",,,,,,,,,,,,,1.00000,,,,,,"AIF413",,,#n
+"maw","Methodik angewandter Wissenschaften",,,,,,,,,,,,,1.00000,,,,,,"IM100",,,#n
+"bewi","Betriebliches Wissensmanagement",,,,,,,,,,,,,1.00000,,,,,,"IM970",,,#n
+"nwo","Netzwerkoptimierung",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"bd","Big Data",,,,,,,,,,,,,1.00000,,,,,,"IB761",,,#n
+"cpl","Concepts of Programming Languages",,,,,,,,,,,,,1.00000,,,,,,"IB762",,,#n
+"pbd","Praktikum Big Data",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"mat1w","Mathematik I",,,,,,,,,,,,,1.00000,,,,,,"WIF130",,,#n
+"mat2w","Mathematik II",,,,,,,,,,,,,1.00000,,,,,,"WIF230",,,#n
+"gdiw","Grundlagen der Informatik",,,,,,,,,,,,,1.00000,,,,,,"WIF110",,,#n
+"prg1w","Programmieren I",,,,,,,,,,,,,1.00000,,,,,,"WIF160",,,#n
+"engw","Englisch",,,,,,,,,,,,,1.00000,,,,,,"WIF290",,,#n
+"secw","IT Sicherheit",,,,,,,,,,,,,1.00000,,,,,,"WIF630",,,#n
+"statw","Statistik",,,,,,,,,,,,,1.00000,,,,,,"WIF330",,,#n
+"dbkw","Datenbanken",,,,,,,,,,,,,1.00000,,,,,,"WIF320",,,#n
+"dbka","Datenbanken",,,,,,,,,,,,,1.00000,,,,,,"AIF311",,,#n
+"prxsw","Praxisseminar - PuK",,,,,,,,,,,,,1.00000,,,,,,"WIF591",,,#n
+"mb","Mobile Business",,,,,,,,,,,,,1.00000,,,,,,"WIF750",,,#n
+"semw","Seminar",,,,,,,,,,,,,1.00000,,,,,,"WIF640",,,#n
+"prg3","Programmieren III",,,,,,,,,,,,,1.00000,,,,,,"IB310",,,#n
+"rea","Rechnerarchitektur",,,,,,,,,,,,,1.00000,,,,,,"IB345",,,#n
+"reaa","Rechnerarchitektur",,,,,,,,,,,,,1.00000,,,,,,"AIF360",,,#n
+"gdia","Grundlagen der Informatik",,,,,,,,,,,,,1.00000,,,,,,"AIF110",,,#n
+"prga","Programmieren I",,,,,,,,,,,,,1.00000,,,,,,"AIF111",,,#n
+"diga","Digitaltechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF112",,,#n
+"prxsa","Praxisseminar",,,,,,,,,,,,,1.00000,,,,,,"AIF591",,,#n
+"proza","Prozessrechentechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF710",,,#n
+"sema","Seminar",,,,,,,,,,,,,1.00000,,,,,,"AIF720",,,#n
+"swe2w","Software Engineering II",,,,,,,,,,,,,1.00000,,,,,,"WIF310",,,#n
+"itrw","IT-Recht",,,,,,,,,,,,,1.00000,,,,,,"WIF470",,,#n
+"prta",,,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"hswc","Hardware-Software-Codesign",,,,,,,,,,,,,1.00000,,,,,,"IM280",,,#n
+"phwswc","Prakt. HW-SW-Codesign",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pmm","Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"IM310",,,#n
+"vdbk","Vertiefung Datenbanksysteme",,,,,,,,,,,,,1.00000,,,,,,"IM420",,,#n
+"pvdbk","Prakt. Datenbanksysteme",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"semm","Seminar",,,,,,,,,,,,,1.00000,,,,,,"IM820",,,#n
+"mss","Management Support Systeme",,,,,,,,,,,,,1.00000,,,,,,"IM950",,,#n
+"bvi","Bildverarbeitung",,,,,,,,,,,,,1.00000,,,,,,"IB760",,,#n
+"pbvi","Prakt. Bildverarbeitung",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ppsim","Prakt. Prozess-Simulation",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pmse","Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"SE22",,,#n
+"wa","Wissensch. Arbeiten",,,,,,,,,,,,,1.00000,,,,,,"IB350",,,#n
+"epm","Einführung Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"IB350",,,#n
+"itpmm","IT-Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"IM310",,,#n
+"mva","Marketing und Vertrieb",,,,,,,,,,,,,1.00000,,,,,,"AIF6xx",,,#n
+"bva","Bildverarbeitung",,,,,,,,,,,,,1.00000,,,,,,"AIF6xx",,,#n
+"phswc","Prakt. HW-SW-Codesign",,"IF013",,,,,,,,,,,1.00000,,,,,,".",,,#n
+"waa","Wissensch. Arbeiten",,,,,,,,,,,,,1.00000,,,,,,"AIF590",,,#n
+"waw","Wissensch. Arbeiten",,,,,,,,,,,,,1.00000,,,,,,"WIF490",,,#n
+"epma","Einführung Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"AIF590",,,#n
+"epmw","Einführung Projektmanagement",,,,,,,,,,,,,1.00000,,,,,,"WIF490",,,#n
+"lop","BW-Anwendungen Lin. Optimierung",,,,,,,,,,,,,1.00000,,,,,,"WIF67x",,,#n
+"uk","Unternehmerische Kompetenzen",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"prg2a","Programmieren II",,,,,,,,,,,,,1.00000,,,,,,"AIF211",,,#n
+"prg2w","Programmieren II",,,,,,,,,,,,,1.00000,,,,,,"WIF260",,,#n
+"algow","Algorithmen und Datenstrukturen",,,,,,,,,,,,,1.00000,,,,,,"WIF410",,,#n
+"algoa","Algorithmen und Datenstrukturen",,,,,,,,,,,,,1.00000,,,,,,"AIF411",,,#n
+"itw","Internettechnologien",,,,,,,,,,,,,1.00000,,,,,,"WIF610",,,#n
+"ita","Internettechnologien",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"mat2a","Ingenieurmathematik",,,,,,,,,,,,,1.00000,,,,,,"AIF220",,,#n
+"swe1a","Software Engineering",,,,,,,,,,,,,1.00000,,,,,,"AIF212",,,#n
+"swe1w","Software Engineering I",,,,,,,,,,,,,1.00000,,,,,,"WIF210",,,#n
+"retea","Rechnertechnik",,,,,,,,,,,,,1.00000,,,,,,"AIF610",,,#n
+"msem","Masterseminar",,,,,,,,,,,,,1.00000,,,,,,"SE15",,,#n
+"üit","Prakt. Internettechnologie",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ecom","Enterprise Computing",,,,,,,,,,,,,1.00000,,,,,,"WIF721",,,#n
+"pki","Prakt. Künstl. Intelligenz",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"iot","Internet of Things",,,,,,,,,,,,,1.00000,,,,,,"WIF723",,,#n
+"piot","Prakt. Internet of Things",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ess","Entw. sicherheitskrit. Systeme",,,,,,,,,,,,,1.00000,,,,,,"AIF620",,,#n
+"pess","Prakt. sicherheitskrit. Systeme",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"sweng3",,,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"pmss","Prakt. Management Support Systeme",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"cp","Compiler",,,,,,,,,,,,,1.00000,,,,,,,,,#n
+"cpiu","Controlling Praxis im Unternehmen",,,,,,,,,,,,,1.00000,,,,,,"WIF67x",,,#n
+"sms","Sicherheit mobiler Systeme",,,,,,,,,,,,,1.00000,,,,,,"WIF722",,,#n
+"psms","Prakt. Sicherheit mobiler Systeme",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"pmc","Prakt. Mobile Computing",,"TI123",,,,,,,,,,,1.00000,,,,,,".",,,#n
+"wpr","Wirtschaftsprivatrecht",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"ar","Arbeitsrecht",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"eam","EnterpriseArchitecture Management",,,,,,,,,,,,,1.00000,,,,,,".",,,#n
+"df","Digitale Forensik",,,,,,,,,,,,,1.00000,,,,,,"IB766",,,#n
+"cs","Creative Strategies",,,,,,,,,,,,,1.00000,,,,,,"SEW45",,,#n
+"pcpl","Prakt. Concepts of Progr. Languages",,,,,,,,,,,,,1.00000,,,,,,".",,,#n

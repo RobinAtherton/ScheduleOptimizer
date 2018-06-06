@@ -20,7 +20,7 @@ global HardSoftScoreHolder scoreHolder;
 rule "noSameRoomAtSameTime"
     when
         $leftLesson : Lesson($leftRoom : room)
-        $rightLesson : Lesson(room == $leftRoom, room != "NO_ROOM",
+        $rightLesson : Lesson(room == $leftRoom, room.getNumber() != "NO_ROOM",
             coupledCollides($leftLesson))
     then
         scoreHolder.addHardConstraintMatch(kcontext, -6);
@@ -54,6 +54,12 @@ rule "collidingWithEndOfSchedule"
         scoreHolder.addHardConstraintMatch(kcontext, -4);
 end
 
+rule "maxCollisions"
+    when
+        $lesson : Lesson(maxCollisions())
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -6);
+ end
 
 //#####################SOFT_CONSTRAINTS#####################
 rule "preferenceBroken"
@@ -86,6 +92,13 @@ rule "scheduleEarlyness"
 end
 
 
+rule "capacity"
+    when
+        $lesson : Lesson(checkForCapacity())
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -10);
+end
+
 //Potentially Unnecessary
 rule "preventLateFridays"
     when
@@ -113,6 +126,8 @@ rule "tryForFriday"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, 5);
 end
+
+
 
 
 

@@ -47,6 +47,8 @@ public class ConsistencyLogic {
         }
     }
 
+
+    //non FWPMS have list of FWPMS they collide with
     public static void updateFWPMBlockedList(ScoreDirector<ScheduleSolution> scoreDirector, Lesson lesson) {
         removePreviousFWPMBlocked(scoreDirector, lesson);
         if (!lesson.isFWPM()) {

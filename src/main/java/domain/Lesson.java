@@ -29,6 +29,7 @@ public class Lesson {
     private List<Student> fwpmStudents = new ArrayList<>();
     private int altId = 0;
     private String collisionReason;
+    private String needsGroup = "";
 
     private List<String> groupList = new ArrayList<>();
     private List<Lesson> sameSemester = new ArrayList<>();
@@ -159,7 +160,7 @@ public class Lesson {
     }
 
     public boolean extensiveCollides(Lesson lesson) {
-        return CollisionDetector.extensiveCollision(this, lesson);
+        return CollisionDetector.isCollision(this, lesson);
     }
 
     public boolean softCollides(Lesson lesson) {
@@ -176,6 +177,14 @@ public class Lesson {
 
     public int checkForCompactness() {
         return CollisionDetector.checkCompactness(this);
+    }
+
+    public boolean checkForCapacity() {
+        return CollisionDetector.checkCapacity(this);
+    }
+
+    public boolean maxCollisions() {
+        return CollisionDetector.notMoreThanThreeAtATime(this);
     }
 
     public String toString() {
@@ -251,11 +260,6 @@ public class Lesson {
         this.dodgeableLessons = dodgeableLessons;
     }
 
-
-    public void print() {
-        System.out.println(toString());
-    }
-
     public String getSemesterName() {
         return this.getCourse().getSemester().getShortName();
     }
@@ -272,6 +276,14 @@ public class Lesson {
         return this.getRoom().getNumber();
     }
 
+    public String getNeedsGroup() {
+        return needsGroup;
+    }
+
+    public void setNeedsGroup(String needsGroup) {
+        this.needsGroup = needsGroup;
+    }
+
     public int getDay() {
         return this.getPeriod().getDay();
     }
@@ -279,5 +291,7 @@ public class Lesson {
     public int getHour() {
         return this.getPeriod().getHour();
     }
+
+
 
 }

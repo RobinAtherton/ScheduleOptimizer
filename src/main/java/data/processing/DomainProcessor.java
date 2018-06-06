@@ -284,6 +284,9 @@ public class DomainProcessor {
                 lesson.setPractical(true);
             }
         }
+        if (s.startsWith("ü")) {
+            lesson.setPractical(true);
+        }
     }
 
     private static void assertDodgeable(List<Lesson> lessons) {

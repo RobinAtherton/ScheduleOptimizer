@@ -14,7 +14,7 @@ public class FileLoader {
     private static final int AMOUNT_OCC_FILES = 1;
 
     private static final int AMOUNT_NEEDED_FILES = AMOUNT_INPUT_FILES + AMOUNT_OCC_FILES;
-    private static final String[] SEMESTERS = {"WIF6"};
+    private static final String[] SEMESTERS = {"I4"};
 
     //folder Paths
     private static String INPUT_PATH = "src/main/resources/data/input/original/";

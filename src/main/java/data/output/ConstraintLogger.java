@@ -15,6 +15,7 @@ import java.util.Map;
 public class ConstraintLogger {
 
     private static ScheduleSolution solution;
+    private static List<String> groupExceptions = new ArrayList<>();
 
     public static void init(ScheduleSolution scheduleSolution) {
         solution = scheduleSolution;
@@ -31,16 +32,14 @@ public class ConstraintLogger {
         System.out.println("################################################################");
         printLecturerCollisions();
         printRoomCollisions();
-        //printColliding();
         printBruteColliding();
         System.out.println("################################################################");
         System.out.println("-----------------------Soft Constraints-------------------------");
         System.out.println("################################################################");
-        //printPreferenceCollisions();
         printPreferenceCollisionFormated();
         printOnlyLessons();
+        printGroupExceptions();
         //printSoftColliding();
-
     }
 
     private static void printColliding() {
@@ -49,7 +48,7 @@ public class ConstraintLogger {
         List<Lesson> passed = new ArrayList<>();
         for (Lesson outer : solution.getLessons()) {
             for (Lesson inner : solution.getLessons()) {
-                if (CollisionDetector.extensiveCollision(outer, inner)) {
+                if (CollisionDetector.isCollision(outer, inner)) {
                     if (outer.getCourse().getSemester().getShortName().equals(inner.getCourse().getSemester().getShortName())) {
                         if (!passed.contains(outer) || !passed.contains(inner)) {
                             System.out.println("\t" + "Colliding: " + outer.getId() + " " + inner.getId());
@@ -90,7 +89,7 @@ public class ConstraintLogger {
         int collisions = 0;
         for (Lesson outer : solution.getLessons()) {
             for (Lesson inner : solution.getLessons()) {
-                if (CollisionDetector.extensiveCollision(outer, inner)) {
+                if (CollisionDetector.isCollision(outer, inner)) {
                     if (outer.getCourse().getSemester().getShortName().equals(inner.getCourse().getSemester().getShortName())) {
                         System.out.println("\t" + "Colliding: " + outer.getId() + " " + inner.getId());
                         System.out.println("\t" + outer.toString() + "\t" + inner.toString());
@@ -115,6 +114,24 @@ public class ConstraintLogger {
             }
         }
         System.out.println("Collisions detected: " + collisions);
+        System.out.println("\n");
+    }
+
+    private static void collectGroupExceptions() {
+        for (Lesson lesson : solution.getLessons()) {
+            if (!lesson.getNeedsGroup().isEmpty()) {
+                groupExceptions.add(lesson.getNeedsGroup());
+            }
+        }
+    }
+
+    private static void printGroupExceptions() {
+        collectGroupExceptions();
+        System.out.println("Group exceptions");
+        for (String string : groupExceptions) {
+            System.out.println("\t" + string);
+            System.out.println("\n");
+        }
         System.out.println("\n");
     }
 
@@ -179,7 +196,8 @@ public class ConstraintLogger {
                 if (CollisionDetector.coupledCollision(outer, inner)) {
                     if (outer.getRoom().getNumber().equals(inner.getRoom().getNumber())
                             && outer.getPeriod().getDay() == inner.getPeriod().getDay()
-                            && outer.getPeriod().getHour() == inner.getPeriod().getHour()) {
+                            && outer.getPeriod().getHour() == inner.getPeriod().getHour()
+                            && !outer.getRoomName().equals("NO_ROOM") && !outer.getRoomName().equals("NO_ROOM")) {
                         if (!passed.contains(outer.getRoom()) && !passed.contains(inner.getRoom())) {
                             System.out.println("\t" + "Room Colliding: " + outer.getId() + " " + inner.getId());
                             System.out.println("\t" + outer.toString() + " " + inner.toString());
@@ -282,10 +300,10 @@ public class ConstraintLogger {
                 if (CollisionDetector.preferenceCollision(outer, inner)) {
                     if (!(passed.contains(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour()))) {
                         if (inner.getConstraint() > 0) {
-                            map.get("POSITIVE").add("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
+                            map.get("POSITIVE").add("\t\t" + "Preference Collision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
                                     + inner.getLecturerName() + " at [" + inner.getDay() + "," + inner.getHour() + "] " + outer.getSemesterName());
                         } else {
-                            map.get("NEGATIVE").add("\t" + "PreferenceCollision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
+                            map.get("NEGATIVE").add("\t\t" + "Preference Collision: " + outer.getId() + " " + outer.getSubjectName() + "\t\t"
                                     + inner.getLecturerName() + " at [" + inner.getDay() + "," + inner.getHour() + "] " + outer.getSemesterName());
                         }
                         passed.add(outer.getId() + "-" + inner.getDay() + "-" + inner.getHour());

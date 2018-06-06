@@ -1,11 +1,13 @@
 package logic;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import domain.Lesson;
 import domain.Period;
 import domain.Preference;
 import domain.Student;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CollisionDetector {
@@ -13,11 +15,12 @@ public class CollisionDetector {
     private static boolean COLLISION = true;
     private static boolean NO_COLLISION = false;
 
-    //Refactored FWPM collision
-    public static boolean extensiveCollision(Lesson left, Lesson right) {
+    //REFACTORED
+    public static boolean isCollision2(Lesson left, Lesson right) {
         if (isTimeCollision(left, right)) {
             if (!left.isFWPM() && !right.isFWPM()) {
-                return baseCollision(left, right);
+                Boolean x = normalCollision(left, right);
+                if (x != null) return x;
             } else if (left.isFWPM() ^ right.isFWPM()) {
                 if (baseCollision(left, right)) {
                     if (!left.isFWPM() && right.isFWPM()) {
@@ -31,6 +34,164 @@ public class CollisionDetector {
                     return isFWPMCollision(left, right);
                 }
             }
+        }
+        return NO_COLLISION;
+    }
+
+    //REFACTORED REFACTORED
+    public static boolean isCollision(Lesson left, Lesson right) {
+        if (!left.isFWPM() && !right.isFWPM()) {
+            Boolean x = normalCollision(left, right);
+            if (x != null) return x;
+        } else if (left.isFWPM() ^ right.isFWPM()) {
+            Boolean x = fwpmNonFwpmCollision(left, right);
+            if (x != null) return x;
+        } else if (left.isFWPM() && right.isFWPM()){
+            if (basicCollision(left, right)) {
+                return isFWPMCollision(left, right);
+            }
+        }
+        return NO_COLLISION;
+    }
+
+    private static Boolean fwpmNonFwpmCollision(Lesson left, Lesson right) {
+        if (isTimeCollision(left, right)) {
+            if (baseCollision(left, right)) {
+                if (left.getSemesterName().equals(right.getSemesterName())) {
+                    if (!left.isFWPM() && right.isFWPM()) {
+                        return mustToFwpmCollision(left, right);
+                    } else {
+                        return fwpmToMustCollision(left, right);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Boolean normalCollision(Lesson left, Lesson right) {
+        if (isTimeCollision(left, right)) {
+            if (!checkForThreeWay(left)) {
+                return NO_COLLISION;
+            } else if (!checkAlternatives(left, right)) {
+                return NO_COLLISION;
+            } else {
+                return baseCollision(left, right);
+            }
+        }
+        return null;
+    }
+
+    private static boolean fwpmToMustCollision(Lesson left, Lesson right) {
+        if (!right.isFWPM() && left.isFWPM()) {
+            for (Lesson dodge : right.getDodgeableLessons()) {
+                if (dodge.getFwpmBlocked().size() == 0) {
+                    return NO_COLLISION;
+                }
+            }
+            if (!additionalPracticalFwpm(left, right)) {
+                return NO_COLLISION;
+            }
+        }
+        left.setCollisionReason("FWPM - Pflicht Kollision");
+        right.setCollisionReason("FWPM - Pflicht Kollision");
+        return COLLISION;
+    }
+
+    private static boolean mustToFwpmCollision(Lesson left, Lesson right) {
+        if (right.isFWPM() && !left.isFWPM()) {
+            for (Lesson dodge : left.getDodgeableLessons()) {
+                if (dodge.getFwpmBlocked().size() == 0) {
+                    return NO_COLLISION;
+                }
+            }
+            if (!additionalPracticalFwpm(left, right)) {
+                return NO_COLLISION;
+            }
+        }
+        left.setCollisionReason("FWPM - Pflicht Kollision");
+        right.setCollisionReason("FWPM - Pflicht Kollision");
+        return COLLISION;
+    }
+
+    private static boolean isFWPMCollision(Lesson left, Lesson right) {
+        if (left.isFWPM() && right.isFWPM()) {
+            for (Student leftS : left.getFWPMStudents()) {
+                for (Student rightS : right.getFWPMStudents()) {
+                    if (leftS.equals(rightS)) {
+                        left.setCollisionReason("FWPM");
+                        right.setCollisionReason("FWPM");
+                        return COLLISION;
+                    }
+                }
+            }
+        }
+        return NO_COLLISION;
+    }
+
+    private static boolean additionalPracticalFwpm(Lesson left, Lesson right) {
+        int amountCollisions = 0;
+        String temp = "";
+        for (Lesson day : left.getSameDay()) {
+            if (isTimeCollision(left, day)) {
+                amountCollisions++;
+            }
+        }
+        if (amountCollisions > 1) {
+            left.setNeedsGroup("");
+            right.setNeedsGroup("");
+            return COLLISION;
+        }
+        if (!left.isFWPM() && right.isFWPM()) {
+            temp = checkGroupDifferences(left, right, temp);
+            if (!temp.equals("")) {
+                return NO_COLLISION;
+            }
+        }
+        if (!right.isFWPM() && left.isFWPM()) {
+            temp = checkGroupDifferences(right, left, temp);
+            if (!temp.equals("")) {
+                return NO_COLLISION;
+            }
+        }
+        left.setNeedsGroup("");
+        right.setNeedsGroup("");
+        return COLLISION;
+    }
+
+    private static String checkGroupDifferences(Lesson left, Lesson right, String temp) {
+        if (left.getGroupList().size() > 1) {
+            if (right.getUKWFlag() || right.getAltId() == 1) {
+                for (String group : left.getGroupList()) {
+                    if (group.contains("2")) {
+                        temp = group;
+                    }
+                }
+                left.setNeedsGroup("Students visiting " + right.toString() + " need to choose Group " + temp + " for " + left.toString());
+            }
+            if (right.getGKWFlag() || right.getAltId() == 2) {
+                for (String group : left.getGroupList()) {
+                    if (group.contains("1")) {
+                        temp = group;
+                    }
+                }
+                left.setNeedsGroup("Students visiting " + right.toString() + " need to choose Group " + temp + " for " + left.toString());
+            }
+        }
+        return temp;
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------
+
+    public static boolean notMoreThanThreeAtATime(Lesson lesson) {
+        int counter = 0;
+        for (Lesson same : lesson.getSameDay()) {
+            if (isTimeCollision(lesson, same)) {
+                counter++;
+            }
+        }
+        if (counter > 3) {
+            return COLLISION;
         }
         return NO_COLLISION;
     }
@@ -61,57 +222,6 @@ public class CollisionDetector {
         return false;
     }
 
-    private static boolean mustToFwpmCollision(Lesson left, Lesson right) {
-        boolean nonBlockedAvailable = false;
-        if (right.isFWPM() && !left.isFWPM()) {
-            for (Lesson dodge : left.getDodgeableLessons()) {
-                if (dodge.getFwpmBlocked().size() == 0) {
-                    nonBlockedAvailable = true;
-                    break;
-                }
-            }
-        }
-        if (nonBlockedAvailable) {
-            return NO_COLLISION;
-        }
-        left.setCollisionReason("FWPM - Pflicht Kollision");
-        right.setCollisionReason("FWPM - Pflicht Kollision");
-        return COLLISION;
-    }
-
-    private static boolean fwpmToMustCollision(Lesson left, Lesson right) {
-        boolean nonBlockedAvailable = false;
-        if (!right.isFWPM() && left.isFWPM()) {
-            for (Lesson dodge : left.getDodgeableLessons()) {
-                if (dodge.getFwpmBlocked().size() == 0) {
-                    nonBlockedAvailable = true;
-                    break;
-                }
-            }
-        }
-        if (nonBlockedAvailable) {
-            return NO_COLLISION;
-        }
-        left.setCollisionReason("FWPM - Pflicht Kollision");
-        right.setCollisionReason("FWPM - Pflicht Kollision");
-        return COLLISION;
-    }
-
-    private static boolean isFWPMCollision(Lesson left, Lesson right) {
-        if (left.isFWPM() && right.isFWPM()) {
-            for (Student leftS : left.getFWPMStudents()) {
-                for (Student rightS : right.getFWPMStudents()) {
-                    if (leftS.equals(rightS)) {
-                        left.setCollisionReason("FWPM");
-                        right.setCollisionReason("FWPM");
-                        return COLLISION;
-                    }
-                }
-            }
-        }
-        return NO_COLLISION;
-    }
-
     public static boolean basicCollision(Lesson left, Lesson right) {
         if (isTimeCollision(left, right)) {
             if (baseCollision(left, right)) {
@@ -129,73 +239,87 @@ public class CollisionDetector {
         }
     }
 
-    //TODO Review
-    //Refactored Collision Code--------------------------------------------TO IMPLEMENT----------------------------------------------------------
-    public static boolean isColliding(Lesson left, Lesson right) {
-        if (!left.isFWPM() && !right.isFWPM()) {
-            return isMustLessonCollision(left, right);
-        } else if (left.isFWPM() ^ right.isFWPM()) {
-            if (isGroupCollision(left, right)) { //check if necessary
-                if (isBiWeeklyCollision(left, right)) {
-                    return isMustFwpmLessonCollision(left, right) ^ isMustFwpmLessonCollision(right, left);
-                }
-            }
-        } else {
-            if (isGroupCollision(left, right)) {
-                if (isBiWeeklyCollision(left, right)) {
-                    return isFwpmLessonCollision(left, right);
+    //Experimental
+    private static boolean checkForThreeWay(Lesson lesson) {
+        List<Lesson> lessons = new ArrayList<>();
+        for (Lesson outer : lesson.getSameDay()) {
+            if (lesson.getSemesterName().equals(outer.getSemesterName())) {
+                if (isTimeCollision(lesson, outer)) {
+                    lessons.add(outer);
                 }
             }
         }
-        return NO_COLLISION;
-    }
-
-    private static boolean isMustLessonCollision(Lesson left, Lesson right) {
-        if (isTimeCollision(left, right)) {
-            if (isGroupCollision(left, right)) {
-                if (isBiWeeklyCollision(left, right)) {
+        lessons.add(lesson);
+        List<String> comboGroup = new ArrayList<>();
+        int flag = 0;
+        if (lessons.size() == 3) {
+            for (Lesson outer : lessons) {
+                if (outer.getGroupList().size() > 1) {
+                    if (flag == 0) {
+                        comboGroup = outer.getGroupList();
+                        flag = 1;
+                    } else if (flag > 0) {
+                        return COLLISION;
+                    }
+                }
+            }
+        }
+        Iterator<Lesson> lessonIterator = lessons.iterator();
+        while (lessonIterator.hasNext()) {
+            Lesson l = lessonIterator.next();
+            if (l.getGroupList().size() > 1) {
+                lessonIterator.remove();
+            }
+        }
+        String sub = "";
+        for (Lesson outer : lessons) {
+            if (sub.equals("" )) {
+                sub = outer.getSubjectName();
+            } else {
+                if (sub != outer.getSubjectName()) {
                     return COLLISION;
                 }
             }
         }
-        return NO_COLLISION;
-    }
 
-    private static boolean isMustFwpmLessonCollision(Lesson left, Lesson right) {
-        boolean nonBlockedAvailable = false;
-        if (isTimeCollision(left, right)) {
-            if (right.isFWPM() && !left.isFWPM()) {
-                for (Lesson dodge : left.getDodgeableLessons()) {
-                    if (dodge.getFwpmBlocked().size() == 0) {
-                        nonBlockedAvailable = true;
-                        break;
-                    }
+        String temp1 = "";
+        String temp2 = "";
+        for (Lesson outer : lessons) {
+            if (!outer.getGroupList().isEmpty()) {
+                if (comboGroup.contains(outer.getGroupList().get(0)) && temp1.equals("")) {
+                    temp1 = outer.getGroupList().get(0);
+                } else if (comboGroup.contains(outer.getGroupList().get(0)) && !temp1.equals("")) {
+                    temp2 = outer.getGroupList().get(0);
                 }
             }
-            if (nonBlockedAvailable) {
+        }
+        if (!temp1.equals("") && !temp2.equals("")) {
+            if (temp1.equals(comboGroup.get(0)) && temp2.equals(comboGroup.get(1)) ||
+                    temp1.equals(comboGroup.get(1)) && temp2.equals(comboGroup.get(0))) {
+                return NO_COLLISION;
+            }
+        } else {
+            return COLLISION;
+        }
+        return COLLISION;
+    }
+
+    private static boolean checkAlternatives(Lesson left, Lesson right) {
+        if (!left.isPractical() || !right.isPractical()) {
+            return COLLISION;
+        }
+        for (Lesson dodge : left.getDodgeableLessons()) {
+            if (dodge.getFwpmBlocked().size() == 0 && dodge.getPracticalBlocked().size() == 0) {
+                return NO_COLLISION;
+            }
+        }
+        for (Lesson dodge : right.getDodgeableLessons()) {
+            if (dodge.getPracticalBlocked().size() == 0 && dodge.getFwpmBlocked().size() == 0) {
                 return NO_COLLISION;
             }
         }
         return COLLISION;
     }
-
-    private static boolean isFwpmLessonCollision(Lesson left, Lesson right) {
-        if (isTimeCollision(left, right)) {
-            if (left.isFWPM() && right.isFWPM()) {
-                for (Student leftStudent : left.getFWPMStudents()) {
-                    for (Student rightStudent : right.getFWPMStudents()) {
-                        if (leftStudent.equals(rightStudent)) {
-                            return COLLISION;
-                        }
-                    }
-                }
-            }
-        }
-        return NO_COLLISION;
-    }
-
-    //Wabern
-
 
     //Refactored PreferenceCollision
     public static boolean preferenceCollision(Lesson lesson, Preference preference) {
@@ -314,6 +438,21 @@ public class CollisionDetector {
         } else {
             return -2;
         }
+    }
+
+    public static boolean checkCapacity(Lesson lesson) {
+        int capacity = 0;
+        if (lesson.isFWPM()) {
+            capacity = lesson.getFWPMStudents().size();
+        } else if (lesson.getGroupList().isEmpty()) {
+            capacity = lesson.getCourse().getSemester().getCapacity();
+        } else if (lesson.getGroupList().size() > 0) {
+            capacity = lesson.getCourse().getSemester().getCapacity() / 3;
+        }
+        if (lesson.getRoom().getCapacity() > capacity) {
+            return NO_COLLISION;
+        }
+        return COLLISION;
     }
 
 
