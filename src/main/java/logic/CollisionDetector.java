@@ -142,13 +142,13 @@ public class CollisionDetector {
             return COLLISION;
         }
         if (!left.isFWPM() && right.isFWPM()) {
-            temp = checkGroupDifferences1(left, right, temp);
+            temp = checkGroupDifferences(left, right);
             if (!temp.equals("")) {
                 return NO_COLLISION;
             }
         }
         if (!right.isFWPM() && left.isFWPM()) {
-            temp = checkGroupDifferences1(right, left, temp);
+            temp = checkGroupDifferences(right, left);
             if (!temp.equals("")) {
                 return NO_COLLISION;
             }
@@ -184,7 +184,7 @@ public class CollisionDetector {
         List<String> temps = new ArrayList<>();
         String temp = "";
         int i = 0;
-        if (left.getGroupList().size() > 1) {
+        if (left.getGroupList().size() > 0) {
             if (right.getUKWFlag() || right.getAltId() == 1) {
                 for (String group : left.getGroupList()) {
                     if (group.contains("2")) {
