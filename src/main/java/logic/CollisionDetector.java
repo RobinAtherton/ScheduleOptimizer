@@ -1,6 +1,5 @@
 package logic;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import domain.Lesson;
 import domain.Period;
 import domain.Preference;
@@ -89,9 +88,9 @@ public class CollisionDetector {
                     return NO_COLLISION;
                 }
             }
-            if (!additionalPracticalFwpm(left, right)) {
+            /*if (!isAdditionalPracticalFwpmException(left, right)) {
                 return NO_COLLISION;
-            }
+            }*/
         }
         left.setCollisionReason("FWPM - Pflicht Kollision");
         right.setCollisionReason("FWPM - Pflicht Kollision");
@@ -105,9 +104,9 @@ public class CollisionDetector {
                     return NO_COLLISION;
                 }
             }
-            if (!additionalPracticalFwpm(left, right)) {
+            /*if (!isAdditionalPracticalFwpmException(left, right)) {
                 return NO_COLLISION;
-            }
+            }*/
         }
         left.setCollisionReason("FWPM - Pflicht Kollision");
         right.setCollisionReason("FWPM - Pflicht Kollision");
@@ -129,7 +128,7 @@ public class CollisionDetector {
         return NO_COLLISION;
     }
 
-    private static boolean additionalPracticalFwpm(Lesson left, Lesson right) {
+    private static boolean isAdditionalPracticalFwpmException(Lesson left, Lesson right) {
         int amountCollisions = 0;
         String temp = "";
         for (Lesson day : left.getSameDay()) {
@@ -143,13 +142,13 @@ public class CollisionDetector {
             return COLLISION;
         }
         if (!left.isFWPM() && right.isFWPM()) {
-            temp = checkGroupDifferences(left, right, temp);
+            temp = checkGroupDifferences1(left, right, temp);
             if (!temp.equals("")) {
                 return NO_COLLISION;
             }
         }
         if (!right.isFWPM() && left.isFWPM()) {
-            temp = checkGroupDifferences(right, left, temp);
+            temp = checkGroupDifferences1(right, left, temp);
             if (!temp.equals("")) {
                 return NO_COLLISION;
             }
@@ -159,7 +158,7 @@ public class CollisionDetector {
         return COLLISION;
     }
 
-    private static String checkGroupDifferences(Lesson left, Lesson right, String temp) {
+    private static String checkGroupDifferences1(Lesson left, Lesson right, String temp) {
         if (left.getGroupList().size() > 1) {
             if (right.getUKWFlag() || right.getAltId() == 1) {
                 for (String group : left.getGroupList()) {
@@ -173,6 +172,51 @@ public class CollisionDetector {
                 for (String group : left.getGroupList()) {
                     if (group.contains("1")) {
                         temp = group;
+                    }
+                }
+                left.setNeedsGroup("Students visiting " + right.toString() + " need to choose Group " + temp + " for " + left.toString());
+            }
+        }
+        return temp;
+    }
+
+    private static String checkGroupDifferences(Lesson left, Lesson right) {
+        List<String> temps = new ArrayList<>();
+        String temp = "";
+        int i = 0;
+        if (left.getGroupList().size() > 1) {
+            if (right.getUKWFlag() || right.getAltId() == 1) {
+                for (String group : left.getGroupList()) {
+                    if (group.contains("2")) {
+                        temps.add(group);
+                    }
+                    if (group.contains("4")) {
+                        temps.add(group);
+                    }
+                }
+                for (String s : temps) {
+                        i++;
+                        temp += s;
+                        if (temps.size() != 1 && i < temps.size()) {
+                            temp += " or ";
+                        }
+                }
+                left.setNeedsGroup("Students visiting " + right.toString() + " need to choose Group " + temp + " for " + left.toString());
+            }
+            if (right.getGKWFlag() || right.getAltId() == 2) {
+                for (String group : left.getGroupList()) {
+                    if (group.contains("1")) {
+                        temps.add(group);
+                    }
+                    if (group.contains("3")) {
+                        temps.add(group);
+                    }
+                }
+                for (String s : temps) {
+                    i++;
+                    temp += s;
+                    if (temps.size() != 1 && i < temps.size()) {
+                        temp += " or ";
                     }
                 }
                 left.setNeedsGroup("Students visiting " + right.toString() + " need to choose Group " + temp + " for " + left.toString());

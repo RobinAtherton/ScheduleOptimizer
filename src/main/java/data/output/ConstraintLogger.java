@@ -142,7 +142,7 @@ public class ConstraintLogger {
         for (Lesson lesson : solution.getLessons()) {
             if (lesson.getSameDay().size() == 0) {
                 if (!passed.contains(lesson.getId())) {
-                    System.out.println(lesson.toString() + " at: " + lesson.getPeriod().toString());
+                    System.out.println("\t" + lesson.toString() + " at: " + lesson.getPeriod().toString());
                     passed.add(lesson.getId());
                     collisions++;
                 }
